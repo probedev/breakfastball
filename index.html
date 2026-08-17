@@ -363,6 +363,38 @@
     font-size:clamp(12.5px,1.65vw,16.5px);
     line-height:1.62;
   }
+  .card #cBody>*+*{margin-top:.65em}
+  .years{
+    list-style:none;
+    display:table;margin:0 auto;text-align:left;
+  }
+  .years li{
+    position:relative;
+    padding:0 0 10px 84px;
+    font-family:var(--body);
+    font-size:clamp(12px,1.55vw,15px);
+    line-height:1.5;
+  }
+  .years li:last-child{padding-bottom:2px}
+  .years b{
+    position:absolute;left:0;top:.14em;width:44px;
+    font-family:var(--display);font-weight:700;
+    font-size:.78em;letter-spacing:.1em;text-transform:uppercase;
+    color:#9a7b3c;text-align:right;
+  }
+  /* the spine and its ball markers */
+  .years li::before{
+    content:"";position:absolute;left:58px;top:.42em;
+    width:8px;height:8px;border-radius:50%;
+    background:var(--cream);
+    border:1.6px solid #9a7b3c;
+  }
+  .years li::after{
+    content:"";position:absolute;left:62px;top:calc(.42em + 12px);bottom:-.42em;
+    width:1.4px;background:rgba(154,123,60,.5);
+  }
+  .years li:last-child::after{display:none}
+  .years li:last-child::before{background:var(--gold);border-color:var(--gold-deep)}
   .card .cta{
     display:inline-block;margin-top:clamp(11px,1.6vw,16px);
     font-family:var(--display);font-weight:600;
@@ -556,6 +588,12 @@
     margin-bottom:8px;color:var(--ink);
   }
   .transcript li p{font-size:14.5px;line-height:1.7;color:var(--ink-soft)}
+  .transcript li p+.years,.transcript .years+p{margin-top:10px}
+  .transcript .years{display:block;margin:0}
+  .transcript .years li{font-size:14px;color:var(--ink-soft);border:none;padding:0 0 12px 84px}
+  .transcript .years b{color:var(--gold-deep)}
+  .transcript .years li::before{background:var(--band);border-color:var(--gold-deep)}
+  .transcript .years li:last-child::before{background:var(--gold)}
   .transcript .t-cta{
     display:inline-block;margin-top:12px;
     font-family:var(--display);font-weight:600;
@@ -761,6 +799,10 @@
     .card .c-eyebrow{font-size:10px;margin-bottom:8px}
     .card h2{font-size:18px;margin-bottom:9px}
     .card p{font-size:14px}
+    .card .years li{font-size:13px;padding-left:74px}
+    .card .years b{width:40px}
+    .card .years li::before{left:52px}
+    .card .years li::after{left:56px}
     .card .cta{margin-top:14px;padding:10px 20px;font-size:11px}
     .card .close{top:8px;right:10px;font-size:18px;padding:6px}
     .billing{transform:none;line-height:1.9}
@@ -881,7 +923,7 @@
       <button class="close" id="cardClose" aria-label="Close">✕</button>
       <div class="c-eyebrow" id="cEyebrow"></div>
       <h2 id="cTitle"></h2>
-      <p id="cBody"></p>
+      <div id="cBody"></div>
       <a class="cta" id="cCta" href="#" style="display:none"></a>
     </div>
   </div>
@@ -1004,7 +1046,15 @@
         <li data-spot="club">
           <p class="t-eyebrow">The Club</p>
           <h3>Members only means you</h3>
-          <p>Breakfastball, LLC. One operator, one habit: virtualizing infrastructure before the tooling has a name. Virtual hosts in the FreeBSD kernel, 1997 — before vhost. Virtual private servers, 2000 — before containers. Orchestrating EC2 and object storage, 2007 — before Kubernetes. Massive multi-cloud, 2015 — before Terraform. Agent fleets, now. The sign painter wrote 1927 and would not come back up the ladder.</p>
+          <p>Breakfastball, LLC. One operator, one habit: virtualizing infrastructure before the tooling has a name.</p>
+          <ul class="years">
+            <li><b>1997</b>Virtual hosts in the FreeBSD kernel — before vhost</li>
+            <li><b>2000</b>Virtual private servers — before containers</li>
+            <li><b>2007</b>Orchestrating EC2 and object storage — before Kubernetes</li>
+            <li><b>2015</b>Massive multi-cloud — before Terraform</li>
+            <li><b>Now</b>Agent fleets</li>
+          </ul>
+          <p>The sign painter wrote 1927 and would not come back up the ladder.</p>
         </li>
       </ol>
     </details>
@@ -1152,10 +1202,14 @@
   document.querySelectorAll('#transcript li[data-spot]').forEach(li=>{
     const id = li.dataset.spot;
     const cta = li.querySelector('.t-cta');
+    let bodyHTML = '';
+    for (let n = li.querySelector('h3').nextElementSibling; n; n = n.nextElementSibling) {
+      if (!n.classList.contains('t-cta')) bodyHTML += n.outerHTML;
+    }
     SPOTS[id] = Object.assign({
       eyebrow: li.querySelector('.t-eyebrow').textContent,
       title:   li.querySelector('h3').textContent,
-      body:    li.querySelector('h3 + p').textContent,
+      bodyHTML: bodyHTML,
       cta:     cta ? {label: cta.textContent, href: cta.href} : null
     }, GEO[id]);
   });
@@ -1197,7 +1251,7 @@
     active=id;
     cEyebrow.textContent=s.eyebrow;
     cTitle.textContent=s.title;
-    cBody.textContent=s.body;
+    cBody.innerHTML=s.bodyHTML;
     if(s.cta){cCta.textContent=s.cta.label;cCta.href=s.cta.href;cCta.style.display='inline-block'}
     else{cCta.style.display='none'}
     card.classList.add('open');
