@@ -5,8 +5,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Breakfastball · An AI Consultancy for Serious Legacy Code</title>
 <meta name="description" content="Breakfastball is an AI consultancy for serious legacy code — modernization by custom agent fleet, run by an operator who has shipped since 1997. Ten secrets are hidden on the course. Find the phone booth.">
-<meta name="color-scheme" content="dark">
-<meta name="theme-color" content="#31482f">
+<meta name="color-scheme" content="light">
+<meta name="theme-color" content="#b7c4b2">
 <link rel="canonical" href="https://breakfastball-tawny.vercel.app/">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Breakfastball">
@@ -25,7 +25,7 @@
 <link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Jost:wght@500;600;700&family=Libre+Caslon+Text:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Jost:ital,wght@0,500;0,600;0,700;1,500&family=Libre+Caslon+Text:ital,wght@0,400;0,700;1,400&family=Oswald:wght@400;500;600&display=swap" rel="stylesheet">
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -38,86 +38,153 @@
 </script>
 <style>
   :root{
+    /* sky sampled from the artwork's top edge; band from its signage */
+    --sky:#b7c4b2;
+    --sky-high:#c6d0bd;
+    --band:#ede3c8;
+    --band-deep:#e3d6b4;
+    --ink:#2c352a;
+    --ink-soft:#5b6153;
     --hedge:#31482f;
-    --fairway:#6b9b5f;
-    --pink:#e8b4b0;
-    --mint:#a8cfb5;
-    --mustard:#d9a62e;
+    --grass:#37472a;
+    --gold:#c8992b;
+    --gold-deep:#77591a;
+    --brick:#a03c28;
     --cream:#f2e9d8;
-    --cream-deep:#e6d9bf;
-    --ink:#2e2a24;
     --display:'Jost',futura-pt,Futura,'Century Gothic',sans-serif;
     --body:'Libre Caslon Text',Georgia,serif;
+    --billing:'Oswald','Arial Narrow',sans-serif;
   }
   *{margin:0;padding:0;box-sizing:border-box}
-  html{scroll-behavior:smooth}
+  html{scroll-behavior:smooth;background:var(--sky)}
   body{
-    background:var(--hedge);
-    background-image:radial-gradient(ellipse 120% 80% at 50% -10%, #3d5839 0%, var(--hedge) 55%, #263a25 100%);
-    color:var(--cream);
+    background:var(--band);
+    color:var(--ink);
     font-family:var(--body);
     min-height:100vh;
-    display:flex;
-    flex-direction:column;
-    align-items:center;
     overflow-x:hidden;
   }
+  /* uniform print grain over the whole sheet */
+  body::after{
+    content:"";position:fixed;inset:0;pointer-events:none;z-index:100;
+    opacity:.14;mix-blend-mode:multiply;
+    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='260' height='260'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='2'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='260' height='260' filter='url(%23n)' opacity='0.32'/%3E%3C/svg%3E");
+  }
 
-  /* ---------- header ---------- */
-  header{
+  /* ---------- sky field (everything above the artwork) ---------- */
+  .sky{
+    background:linear-gradient(var(--sky-high), var(--sky) 70%);
+    padding:clamp(18px,3vh,34px) 20px clamp(26px,4vh,44px);
     text-align:center;
-    padding:clamp(28px,4.5vh,52px) 20px 0;
-    max-width:900px;
   }
-  .eyebrow{
-    font-family:var(--display);
-    font-weight:500;
-    font-size:clamp(10px,1.2vw,12px);
-    letter-spacing:.42em;
-    text-transform:uppercase;
-    color:var(--mint);
-    margin-bottom:14px;
+  .sky-inner{max-width:1100px;margin:0 auto}
+
+  /* laurels flanking the presents line (Darjeeling) */
+  .laurel-row{
+    display:grid;
+    grid-template-columns:1fr auto 1fr;
+    align-items:center;
+    gap:clamp(8px,2vw,20px);
+    margin-bottom:clamp(4px,1vh,10px);
   }
-  .eyebrow::before,.eyebrow::after{content:"·";margin:0 14px;color:var(--mustard)}
-  h1{
+  .laurel{
+    display:flex;flex-direction:column;align-items:center;gap:3px;
+    font-family:var(--display);font-weight:600;
+    font-size:clamp(6.5px,.8vw,8.5px);
+    letter-spacing:.2em;text-transform:uppercase;
+    color:var(--ink-soft);text-align:center;line-height:1.55;
+  }
+  .laurel:first-child{justify-self:end}
+  .laurel:last-child{justify-self:start}
+  .laurel svg{width:clamp(58px,7vw,80px);height:auto;stroke:var(--ink-soft);fill:none;stroke-width:2;stroke-linecap:round}
+  .laurel .yr{font-weight:700;color:var(--ink);font-size:1.2em;letter-spacing:.26em}
+  .presents{
+    font-family:var(--display);font-weight:600;
+    font-size:clamp(8.5px,1.05vw,11px);
+    letter-spacing:.4em;text-transform:uppercase;
+    color:var(--ink-soft);
+  }
+  .presents b{color:var(--ink);font-weight:700}
+
+  /* title on a cable arc (Grand Budapest) */
+  .arc-wrap{margin:0 auto;max-width:1400px}
+  .arc-wrap svg{
+    display:block;width:100%;height:auto;overflow:visible;
+  }
+  .arc-wrap .cable{stroke:var(--gold-deep);stroke-width:1.6;fill:none;opacity:.8}
+  .arc-wrap text{
     font-family:var(--display);
     font-weight:700;
-    font-size:clamp(34px,6vw,64px);
-    letter-spacing:.18em;
-    text-transform:uppercase;
-    color:var(--cream);
-    line-height:1.05;
+    font-size:104px;
+    letter-spacing:16px;
+    fill:var(--gold);
+    stroke:var(--gold-deep);
+    stroke-width:2.4;
+    paint-order:stroke fill;
   }
-  h1 .ball{color:var(--mustard)}
-  .sub{
-    font-family:var(--body);
-    font-style:italic;
-    font-size:clamp(14px,1.6vw,17px);
-    color:#cfdcc8;
-    margin-top:14px;
-    line-height:1.6;
+  .visually-hidden{
+    position:absolute;width:1px;height:1px;overflow:hidden;
+    clip:rect(0 0 0 0);clip-path:inset(50%);white-space:nowrap;
   }
-  .sub b{font-style:normal;color:var(--mustard);font-weight:700}
+  .subline{
+    font-family:var(--display);font-weight:600;
+    font-size:clamp(9px,1.15vw,12px);
+    letter-spacing:.42em;text-transform:uppercase;
+    color:var(--hedge);
+    margin:clamp(8px,1.4vh,16px) 0 clamp(16px,2.6vh,30px);
+  }
+  .subline::before,.subline::after{content:"·";margin:0 12px;color:var(--brick)}
 
-  /* ---------- proscenium / scene ---------- */
+  /* cast block in the sky (Grand Budapest pairs) */
+  .cast{
+    display:grid;
+    grid-template-columns:repeat(2, minmax(0,300px));
+    justify-content:center;
+    column-gap:clamp(30px,7vw,110px);
+    row-gap:clamp(10px,1.8vh,18px);
+  }
+  .cast .who{font-family:var(--display);text-wrap:balance}
+  .cast .who .nm{
+    display:block;font-weight:700;
+    font-size:clamp(11px,1.35vw,15px);
+    letter-spacing:.22em;text-transform:uppercase;
+    color:var(--ink);
+  }
+  .cast .who:nth-child(odd) .nm{color:var(--brick)}
+  .cast .who .as{
+    display:block;margin-top:2px;
+    font-family:var(--body);font-style:italic;
+    font-size:clamp(10px,1.1vw,12.5px);
+    color:var(--ink-soft);
+  }
+  .cast .who.wide{grid-column:1 / -1}
+  .introducing{
+    margin-top:clamp(16px,2.6vh,26px);
+    font-family:var(--display);font-weight:600;
+    font-size:clamp(9px,1.1vw,11.5px);
+    letter-spacing:.34em;text-transform:uppercase;
+    color:var(--ink-soft);
+  }
+  .introducing b{color:var(--brick);font-weight:700}
+
+  /* ---------- artwork: full-width still, hard edges (Moonrise JP) ---------- */
   .stage{
     position:relative;
-    margin:clamp(20px,3.5vh,36px) auto clamp(80px,12vh,110px);
-    width:min(92vw, 78vh, 980px);
+    background:var(--sky);
+    display:flex;justify-content:center;
+    padding:0 0 clamp(26px,4vh,46px);
   }
-  .frame{
+  .artwrap{
     position:relative;
-    border:1px solid var(--mustard);
-    outline:1px solid rgba(217,166,46,.35);
-    outline-offset:6px;
-    box-shadow:0 30px 80px rgba(0,0,0,.5), 0 6px 20px rgba(0,0,0,.4);
-    background:#000;
+    width:min(96vw, 88vh, 980px);
+    box-shadow:0 22px 60px rgba(44,53,42,.38), 0 4px 14px rgba(44,53,42,.28);
   }
   .scene{
     position:relative;
     overflow:hidden;
     container-type:inline-size;
     aspect-ratio:1/1;
+    background:#000;
   }
   .scene-inner{
     position:absolute; inset:-1.6%;
@@ -133,7 +200,6 @@
   }
   @keyframes breathe{from{transform:scale(1)}to{transform:scale(1.018)}}
 
-  /* drifting clouds */
   .cloud{
     position:absolute;
     background:radial-gradient(closest-side, rgba(255,255,255,.55), rgba(255,255,255,0));
@@ -146,7 +212,6 @@
   .cloud.c2{width:18%;height:5%;top:12%;left:-20%;animation:drift 190s linear infinite;animation-delay:-70s}
   @keyframes drift{to{transform:translateX(560%)}}
 
-  /* film grain + vignette */
   .grain{
     position:absolute;inset:0;pointer-events:none;opacity:.5;mix-blend-mode:overlay;
     background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='240' height='240'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='240' height='240' filter='url(%23n)' opacity='0.35'/%3E%3C/svg%3E");
@@ -156,7 +221,6 @@
     box-shadow:inset 0 0 12cqi rgba(30,25,10,.35);
   }
 
-  /* dim + spotlight */
   .dim{
     position:absolute;inset:0;pointer-events:none;
     background:rgba(18,26,18,.62);
@@ -171,7 +235,7 @@
   .overlay-board{
     position:absolute;
     left:69.6%; top:63.2%; width:12.9%; height:12.6%;
-    background:var(--cream-deep);
+    background:#e6d9bf;
     border:.15cqi solid #7a5c33;
     border-radius:.3cqi;
     box-shadow:inset 0 0 .8cqi rgba(90,60,20,.35);
@@ -206,7 +270,6 @@
     box-shadow:inset 0 0 .3cqi rgba(90,60,20,.4);
   }
 
-  /* hotspot hit areas */
   .hs{
     position:absolute;
     background:transparent;
@@ -216,14 +279,14 @@
     -webkit-tap-highlight-color:transparent;
   }
   .hs:focus-visible{
-    outline:.35cqi dashed var(--mustard);
+    outline:.35cqi dashed var(--gold);
     outline-offset:.3cqi;
   }
   .hs .ping{
     position:absolute;left:50%;top:50%;
     width:1.3cqi;height:1.3cqi;margin:-0.65cqi;
     border-radius:50%;
-    background:var(--mustard);
+    background:#d9a62e;
     box-shadow:0 0 0 .35cqi rgba(217,166,46,.35);
     opacity:0;transform:scale(.4);
     transition:opacity .4s ease, transform .4s ease;
@@ -234,7 +297,7 @@
   @keyframes pulse{50%{box-shadow:0 0 0 .9cqi rgba(217,166,46,0)}}
 
   /* ---------- intertitle card ----------
-     Lives in .frame, not .scene: .scene's container-type applies layout
+     Lives in .artwrap, not .scene: .scene's container-type applies layout
      containment, which would trap the mobile position:fixed sheet inside
      the (overflow:hidden) scene. */
   .card{
@@ -243,7 +306,7 @@
     transform:translate(-50%, 18px);
     width:min(78%, 560px);
     background:var(--cream);
-    color:var(--ink);
+    color:#2e2a24;
     border:1px solid #b39a63;
     box-shadow:0 18px 50px rgba(0,0,0,.45), inset 0 0 0 4px var(--cream), inset 0 0 0 5px #c9b078;
     padding:clamp(16px,2.4vw,24px) clamp(18px,2.8vw,27px) clamp(15px,2.2vw,22px);
@@ -269,7 +332,6 @@
     font-size:clamp(12.5px,1.65vw,16.5px);
     line-height:1.62;
   }
-  .card p b{font-weight:700}
   .card .cta{
     display:inline-block;margin-top:clamp(11px,1.6vw,16px);
     font-family:var(--display);font-weight:600;
@@ -279,7 +341,7 @@
     border:1px solid var(--hedge);
     transition:background .2s ease,color .2s ease;
   }
-  .card .cta:hover{background:var(--mustard);border-color:var(--mustard);color:var(--ink)}
+  .card .cta:hover{background:var(--gold);border-color:var(--gold);color:#2e2a24}
   .card .close{
     position:absolute;top:clamp(5px,.7vw,7px);right:clamp(6px,.9vw,9px);
     background:none;border:none;cursor:pointer;
@@ -287,110 +349,191 @@
     color:#9a7b3c;padding:4px;line-height:1;
   }
 
-  /* ---------- scorecard ---------- */
-  .scorecard{
-    position:fixed;
-    left:50%;bottom:18px;transform:translateX(-50%);
-    background:var(--cream);
-    color:var(--ink);
-    border:1px solid #b39a63;
-    box-shadow:0 10px 30px rgba(0,0,0,.45), inset 0 0 0 3px var(--cream), inset 0 0 0 4px #c9b078;
-    display:flex;align-items:center;gap:14px;
-    padding:9px 16px;
+  /* ---------- billing band (hard cut below the still, Moonrise JP) ---------- */
+  .band{
+    background:linear-gradient(var(--band), var(--band-deep));
+    text-align:center;
+    padding:clamp(26px,4.5vh,50px) 20px clamp(20px,3vh,34px);
+  }
+  .band-inner{max-width:900px;margin:0 auto}
+  .tagline{
+    font-family:var(--display);font-weight:700;
+    font-size:clamp(15px,2.4vw,24px);
+    letter-spacing:.14em;text-transform:uppercase;
+    color:var(--brick);
+    margin-bottom:clamp(18px,3vh,30px);
+  }
+  .billing{
+    font-family:var(--billing);
+    font-weight:500;
+    text-transform:uppercase;
+    color:var(--ink-soft);
+    font-size:clamp(7px,1.05vw,10.5px);
+    letter-spacing:.05em;
+    word-spacing:.3em;
+    line-height:2.05;
+    transform:scaleY(1.3);
+    transform-origin:top center;
+    padding:0 clamp(4px,3vw,30px);
+    margin-bottom:clamp(26px,4vh,42px);
+  }
+  .billing .nm{font-weight:600;color:var(--ink);font-size:1.24em}
+  .billing .qt{color:var(--gold-deep);font-weight:600;font-size:1.24em;letter-spacing:.12em}
+  .bottomrow{
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    gap:clamp(14px,2.6vw,30px);
+    flex-wrap:wrap;
+    margin-bottom:clamp(10px,1.6vh,18px);
+  }
+  .rating{
+    display:flex;align-items:stretch;
+    border:1.5px solid var(--ink);
     font-family:var(--display);
-    z-index:60;
-    max-width:94vw;
+    background:rgba(255,255,255,.25);
   }
-  .scorecard .sc-label{
-    font-weight:600;font-size:10px;letter-spacing:.32em;text-transform:uppercase;color:#9a7b3c;white-space:nowrap;
+  .rating .r{
+    display:flex;align-items:center;justify-content:center;
+    font-weight:700;font-size:clamp(15px,2.2vw,21px);
+    padding:4px 10px;
+    border-right:1.5px solid var(--ink);
+    letter-spacing:.02em;
   }
-  .tally{display:flex;gap:5px}
-  .tally i{
-    width:11px;height:11px;border:1px solid #9a7b3c;border-radius:50%;
-    display:block;transition:background .3s ease,transform .3s ease;
+  .rating .why{
+    display:flex;flex-direction:column;justify-content:center;
+    font-weight:600;font-size:clamp(6px,.85vw,8px);
+    letter-spacing:.16em;text-transform:uppercase;
+    padding:4px 10px;line-height:1.6;color:var(--ink-soft);
+    text-align:left;
   }
-  .tally i.hit{background:var(--mustard);border-color:var(--mustard);transform:scale(1.15)}
-  .scorecard .count{font-weight:700;font-size:13px;letter-spacing:.1em;min-width:44px;text-align:center}
-  .hintbtn{
-    font-family:var(--display);font-weight:600;
-    font-size:9.5px;letter-spacing:.24em;text-transform:uppercase;
-    background:none;border:1px solid #9a7b3c;color:#6e5526;
-    padding:6px 12px;cursor:pointer;white-space:nowrap;
-    transition:background .2s ease,color .2s ease;
+  .release{
+    font-family:var(--display);font-weight:700;
+    font-size:clamp(10px,1.3vw,13px);
+    letter-spacing:.3em;text-transform:uppercase;
+    color:var(--ink);
+    text-align:center;
   }
-  .hintbtn:hover,.hintbtn[aria-pressed="true"]{background:var(--hedge);color:var(--cream);border-color:var(--hedge)}
-  .scorecard.perfect{border-color:var(--mustard)}
-  .scorecard.perfect .sc-label{color:var(--ink)}
-  .scorecard .perfect-cta{display:none}
-  .scorecard.perfect .perfect-cta{
-    display:inline-block;
-    font-weight:700;font-size:10px;letter-spacing:.24em;text-transform:uppercase;
-    color:var(--cream);background:var(--hedge);padding:7px 14px;text-decoration:none;white-space:nowrap;
+  .release a{color:var(--brick);text-decoration:none;border-bottom:1px solid var(--gold)}
+  .release a:hover{color:var(--gold-deep)}
+  .release small{
+    display:block;
+    font-weight:500;font-size:.72em;
+    letter-spacing:.28em;color:var(--ink-soft);
+    margin-top:4px;
   }
-  .scorecard.perfect .perfect-cta:hover{background:var(--mustard);color:var(--ink)}
 
   /* ---------- course notes (no-JS / reader fallback, source of card copy) ---------- */
   .transcript{
-    width:min(92vw,640px);
-    margin:0 auto clamp(60px,9vh,90px);
+    max-width:640px;
+    margin:0 auto;
+    text-align:left;
+    border-top:1px solid rgba(44,53,42,.25);
+    padding-top:6px;
   }
   .transcript summary{
     cursor:pointer;
     text-align:center;
     font-family:var(--display);
     font-weight:600;
-    font-size:11px;letter-spacing:.32em;text-transform:uppercase;
-    color:var(--mint);
-    padding:10px;
+    font-size:10.5px;letter-spacing:.32em;text-transform:uppercase;
+    color:var(--ink-soft);
+    padding:12px 10px;
     list-style:none;
   }
   .transcript summary::-webkit-details-marker{display:none}
-  .transcript summary::after{content:" +";color:var(--mustard)}
+  .transcript summary::after{content:" +";color:var(--brick)}
   .transcript[open] summary::after{content:" −"}
   .transcript summary h2{font:inherit;display:inline;letter-spacing:inherit}
   .transcript ol{
     list-style:none;
-    margin-top:18px;
-    border-top:1px solid rgba(217,166,46,.35);
+    margin-top:8px;
+    border-top:1px solid rgba(44,53,42,.18);
   }
   .transcript li{
-    padding:22px 6px 24px;
-    border-bottom:1px solid rgba(217,166,46,.2);
+    padding:20px 6px 22px;
+    border-bottom:1px solid rgba(44,53,42,.14);
   }
   .transcript .t-eyebrow{
     font-family:var(--display);font-weight:600;
     font-size:10px;letter-spacing:.4em;text-transform:uppercase;
-    color:var(--mustard);margin-bottom:7px;
+    color:var(--gold-deep);margin-bottom:7px;
   }
   .transcript h3{
     font-family:var(--display);font-weight:700;
-    font-size:17px;letter-spacing:.06em;text-transform:uppercase;
-    margin-bottom:8px;
+    font-size:16px;letter-spacing:.06em;text-transform:uppercase;
+    margin-bottom:8px;color:var(--ink);
   }
-  .transcript li p{font-size:14.5px;line-height:1.7;color:#dfe8d6}
+  .transcript li p{font-size:14.5px;line-height:1.7;color:var(--ink-soft)}
   .transcript .t-cta{
     display:inline-block;margin-top:12px;
     font-family:var(--display);font-weight:600;
     font-size:11px;letter-spacing:.3em;text-transform:uppercase;
-    color:var(--cream);background:rgba(217,166,46,.16);
-    border:1px solid var(--mustard);
+    color:var(--cream);background:var(--hedge);
+    border:1px solid var(--hedge);
     padding:9px 18px;text-decoration:none;
     transition:background .2s ease,color .2s ease;
   }
-  .transcript .t-cta:hover{background:var(--mustard);color:var(--ink)}
+  .transcript .t-cta:hover{background:var(--gold);border-color:var(--gold);color:#2e2a24}
 
   footer{
     text-align:center;
-    padding:0 20px 120px;
+    padding:clamp(18px,3vh,30px) 20px 110px;
     font-family:var(--display);
-    font-size:10px;letter-spacing:.3em;text-transform:uppercase;
-    color:#8fae87;
+    font-size:9.5px;letter-spacing:.3em;text-transform:uppercase;
+    color:var(--ink-soft);
   }
-  footer a{color:var(--mint);text-decoration:none}
-  footer a:hover{color:var(--mustard)}
+  footer a{color:var(--brick);text-decoration:none}
+  footer a:hover{color:var(--gold-deep)}
+
+  /* ---------- scorecard: engraved black plaque (Moonrise Kingdom) ---------- */
+  .scorecard{
+    position:fixed;
+    left:50%;bottom:16px;transform:translateX(-50%);
+    background:#1d201b;
+    color:var(--cream);
+    border:1px solid #0e100d;
+    box-shadow:0 10px 30px rgba(20,24,18,.5), inset 0 0 0 1px rgba(242,233,216,.28);
+    display:flex;align-items:center;gap:14px;
+    padding:10px 18px;
+    font-family:var(--display);
+    z-index:60;
+    max-width:94vw;
+  }
+  .scorecard .sc-label{
+    font-weight:600;font-size:10px;letter-spacing:.32em;text-transform:uppercase;color:#b9b399;white-space:nowrap;
+  }
+  .tally{display:flex;gap:5px}
+  .tally i{
+    width:10px;height:10px;border:1px solid #8d876e;border-radius:50%;
+    display:block;transition:background .3s ease,transform .3s ease;
+  }
+  .tally i.hit{background:#d9a62e;border-color:#d9a62e;transform:scale(1.15)}
+  .scorecard .count{font-weight:700;font-size:13px;letter-spacing:.1em;min-width:44px;text-align:center;color:var(--cream);white-space:nowrap}
+  .hintbtn{
+    font-family:var(--display);font-weight:600;
+    font-size:9.5px;letter-spacing:.24em;text-transform:uppercase;
+    background:none;border:1px solid #8d876e;color:#d8d1b6;
+    padding:6px 12px;cursor:pointer;white-space:nowrap;
+    transition:background .2s ease,color .2s ease;
+  }
+  .hintbtn:hover,.hintbtn[aria-pressed="true"]{background:var(--cream);color:#1d201b;border-color:var(--cream)}
+  .scorecard.perfect{border-color:var(--gold);box-shadow:0 10px 30px rgba(20,24,18,.5), inset 0 0 0 1px var(--gold)}
+  .scorecard .perfect-cta{display:none}
+  .scorecard.perfect .perfect-cta{
+    display:inline-block;
+    font-weight:700;font-size:10px;letter-spacing:.24em;text-transform:uppercase;
+    color:#1d201b;background:#d9a62e;padding:7px 14px;text-decoration:none;white-space:nowrap;
+  }
+  .scorecard.perfect .perfect-cta:hover{background:var(--cream)}
 
   /* mobile: card becomes a bottom sheet */
   @media (max-width:640px){
+    .laurel{display:none}
+    .laurel-row{grid-template-columns:1fr}
+    .arc-wrap text{letter-spacing:6px;font-size:106px}
+    .cast{grid-template-columns:minmax(0,1fr);row-gap:12px}
+    .artwrap{width:100vw}
     .card{
       position:fixed;left:0;right:0;bottom:0;width:100%;
       transform:translate(0,24px);
@@ -404,6 +547,7 @@
     .card p{font-size:14px}
     .card .cta{margin-top:14px;padding:10px 20px;font-size:11px}
     .card .close{top:8px;right:10px;font-size:18px;padding:6px}
+    .billing{transform:none;line-height:1.9}
     .scorecard{bottom:10px;gap:9px;padding:8px 12px}
     .tally{display:none}
     .hintbtn{padding:6px 9px}
@@ -419,22 +563,64 @@
 </head>
 <body>
 
-<header>
-  <div class="eyebrow">An AI consultancy for serious legacy code</div>
-  <h1>Breakfast<span class="ball">ball</span></h1>
-  <p class="sub">Legacy modernization by custom agent fleet. <b>Ten secrets</b> are hidden on this course. Find the phone&nbsp;booth.</p>
+<header class="sky">
+  <div class="sky-inner">
+    <div class="laurel-row">
+      <div class="laurel">
+        <svg viewBox="0 0 100 40" aria-hidden="true">
+          <path d="M50 36 C30 36 16 26 12 8 M18 30 q-7 1 -10 -5 q7 -3 10 5 M14 22 q-7 0 -9 -6 q7 -2 9 6 M12 14 q-6 -1 -7 -7 q7 -1 7 7 M24 34 q-6 3 -11 -1 q5 -5 11 1 M32 36 q-5 4 -11 2 q4 -6 11 -2 M41 37 q-4 5 -11 4 q3 -7 11 -4"/>
+          <path d="M50 36 C70 36 84 26 88 8 M82 30 q7 1 10 -5 q-7 -3 -10 5 M86 22 q7 0 9 -6 q-7 -2 -9 6 M88 14 q6 -1 7 -7 q-7 -1 -7 7 M76 34 q6 3 11 -1 q-5 -5 -11 1 M68 36 q5 4 11 2 q-4 -6 -11 -2 M59 37 q4 5 11 4 q-3 -7 -11 -4"/>
+        </svg>
+        <span>Official Selection</span>
+        <span>AWS Startup Challenge</span>
+        <span class="yr">2008</span>
+      </div>
+      <p class="presents"><b>Breakfastball, LLC</b> presents an Agent Fleet production</p>
+      <div class="laurel">
+        <svg viewBox="0 0 100 40" aria-hidden="true">
+          <path d="M50 36 C30 36 16 26 12 8 M18 30 q-7 1 -10 -5 q7 -3 10 5 M14 22 q-7 0 -9 -6 q7 -2 9 6 M12 14 q-6 -1 -7 -7 q7 -1 7 7 M24 34 q-6 3 -11 -1 q5 -5 11 1 M32 36 q-5 4 -11 2 q4 -6 11 -2 M41 37 q-4 5 -11 4 q3 -7 11 -4"/>
+          <path d="M50 36 C70 36 84 26 88 8 M82 30 q7 1 10 -5 q-7 -3 -10 5 M86 22 q7 0 9 -6 q-7 -2 -9 6 M88 14 q6 -1 7 -7 q-7 -1 -7 7 M76 34 q6 3 11 -1 q-5 -5 -11 1 M68 36 q5 4 11 2 q-4 -6 -11 -2 M59 37 q4 5 11 4 q-3 -7 -11 -4"/>
+        </svg>
+        <span>Shipping in the Valley</span>
+        <span>Since Dial-Up</span>
+        <span class="yr">1997</span>
+      </div>
+    </div>
+
+    <h1 class="arc-wrap">
+      <span class="visually-hidden">Breakfastball</span>
+      <svg viewBox="0 40 1200 240" aria-hidden="true">
+        <path id="cable" d="M -80 258 C 320 60, 880 60, 1280 258" class="cable"/>
+        <text><textPath href="#cable" startOffset="50%" text-anchor="middle">BREAKFASTBALL</textPath></text>
+      </svg>
+    </h1>
+
+    <p class="subline">An AI consultancy for serious legacy code</p>
+
+    <div class="cast">
+      <span class="who"><span class="nm">Gregg</span><span class="as">the operator</span></span>
+      <span class="who"><span class="nm">A Fox in a Bowtie</span><span class="as">the hook</span></span>
+      <span class="who"><span class="nm">An Overloaded Caddie</span><span class="as">the problem</span></span>
+      <span class="who"><span class="nm">Twin Groundskeepers</span><span class="as">the method</span></span>
+      <span class="who"><span class="nm">A Woman with a Telescope</span><span class="as">the first look</span></span>
+      <span class="who"><span class="nm">The Ninth Hole Breakfast Cart</span><span class="as">est. 2008</span></span>
+      <span class="who wide"><span class="nm">and Your Legacy Codebase</span><span class="as">currently +14</span></span>
+    </div>
+
+    <p class="introducing">and introducing <b>ten secrets</b> hidden in frame — find the phone booth</p>
+  </div>
 </header>
 
 <div class="stage">
-  <div class="frame">
+  <div class="artwrap">
     <div class="scene" id="scene">
       <div class="scene-inner" id="parallax">
         <picture>
-          <source type="image/avif" srcset="assets/course-800.avif 800w, assets/course.avif 1600w" sizes="(max-width: 640px) 92vw, 980px">
+          <source type="image/avif" srcset="assets/course-800.avif 800w, assets/course.avif 1600w" sizes="(max-width: 640px) 100vw, 980px">
           <img id="sceneImg"
                src="assets/course.jpg"
                srcset="assets/course-800.jpg 800w, assets/course.jpg 1600w"
-               sizes="(max-width: 640px) 92vw, 980px"
+               sizes="(max-width: 640px) 100vw, 980px"
                width="1600" height="1600"
                fetchpriority="high" decoding="async"
                alt="A storybook golf course tableau: the pink-and-mint Hickory Heights clubhouse on a hill, a caddie under a towering stack of golf bags, a golfer mid-swing, twin groundskeepers mowing in parallel, a striped breakfast cart, a leaderboard, a fox running off with a ball, a pink station wagon, a woman with a telescope, and a mint telephone booth.">
@@ -480,63 +666,84 @@
   </div>
 </div>
 
-<!-- Single source of truth for the hotspot copy; readable without JS and by crawlers. -->
-<details class="transcript" id="transcript">
-  <summary><h2>Course notes — prefer to read the round?</h2></summary>
-  <ol>
-    <li data-spot="fox">
-      <p class="t-eyebrow">The Hook</p>
-      <h3>The fox is already running</h3>
-      <p>Your legacy codebase did not steal itself. Every quarter it sits, the rewrite gets bigger, the team gets slower, and the fox gets another ball. The phone booth works whenever you are ready.</p>
-    </li>
-    <li data-spot="caddie">
-      <p class="t-eyebrow">The Problem</p>
-      <h3>The bag only gets heavier</h3>
-      <p>Fifteen years of features. Five frameworks. One exhausted team carrying all of it up the hill. We carry exactly this.</p>
-    </li>
-    <li data-spot="crew">
-      <p class="t-eyebrow">The Method</p>
-      <h3>A fleet mows faster than a mower</h3>
-      <p>Not one AI assistant. A crew of purpose-built agents, each with its own stripe, working in parallel under an operator who has shipped since dial-up. That is how 3x happens.</p>
-    </li>
-    <li data-spot="golfer">
-      <p class="t-eyebrow">The Operator</p>
-      <h3>Same swing, better clubs</h3>
-      <p>Gregg has been shipping for 25 years. Kernel hacker in 1997. Cloud pioneer in 2008. Agent fleet operator now. Follow the pink wagon and the breakfast cart for the full round.</p>
-    </li>
-    <li data-spot="wagon">
-      <p class="t-eyebrow">1997</p>
-      <h3>Where the round started</h3>
-      <p>First job: the first web hosting company in Silicon Valley, where Gregg extended the FreeBSD kernel to invent virtual hosting. He was solving infrastructure problems before most of today's legacy code existed.</p>
-    </li>
-    <li data-spot="cart">
-      <p class="t-eyebrow">2008, and the name</p>
-      <h3>Everyone gets a breakfast ball</h3>
-      <p>A breakfast ball is the free do-over on the first tee. Gregg took his in the cloud: encoding.com, the first cloud video transcoding service, built on S3 and EC2 before that was normal, scaled to the biggest names in streaming. Your codebase deserves a do-over too.</p>
-    </li>
-    <li data-spot="board">
-      <p class="t-eyebrow">The Proof</p>
-      <h3>Check the leaderboard</h3>
-      <p>Every name on that board shipped. Engagements run in weeks, not roadmap quarters: migrations landed, coverage up, deploys multiplied. Note who is in last place.</p>
-    </li>
-    <li data-spot="scout">
-      <p class="t-eyebrow">The First Look</p>
-      <h3>Every engagement starts here</h3>
-      <p>A close, honest look at your codebase. You get an audit, a modernization roadmap, and a straight answer about what an agent fleet can and cannot do for it. No committal swing required.</p>
-    </li>
-    <li data-spot="phone">
-      <p class="t-eyebrow">The Call</p>
-      <h3>One conversation</h3>
-      <p>Bring your gnarliest repo. If a fleet will not move the needle, you will hear that too.</p>
-      <a class="t-cta" href="mailto:hello@breakfastball.com">Book a tee time</a>
-    </li>
-    <li data-spot="club">
-      <p class="t-eyebrow">The Club</p>
-      <h3>Members only means you</h3>
-      <p>Breakfastball, LLC. One operator, one offer: legacy modernization by custom agent fleet. Established 1997 in spirit. Check the plaque above the porch.</p>
-    </li>
-  </ol>
-</details>
+<div class="band">
+  <div class="band-inner">
+    <p class="tagline">Every codebase deserves a breakfast ball.</p>
+
+    <p class="billing">
+      Breakfastball LLC presents <span class="qt">“Breakfastball”</span> starring <span class="nm">Your Legacy Codebase</span> with <span class="nm">A Custom Agent Fleet</span> and <span class="nm">A Fox</span> · kernel work <span class="nm">Gregg</span> (1997) · cloud transcoding <span class="nm">encoding.com</span> (2008) · media inspection <span class="nm">probe.dev</span> · casting by <span class="nm">25 Years of Shipping</span> · director of modernization <span class="nm">Gregg</span> · engagements measured in <span class="nm">Weeks, Not Quarters</span>
+    </p>
+
+    <div class="bottomrow">
+      <div class="rating" role="img" aria-label="Rated 3X for accelerated development">
+        <div class="r">3X</div>
+        <div class="why"><span>Rated 3X for</span><span>Accelerated Development</span></div>
+      </div>
+      <div class="release">
+        Now accepting engagements · <a href="mailto:hello@breakfastball.com">Book a tee time</a>
+        <small>Hickory Heights · Established 1997</small>
+      </div>
+    </div>
+
+    <!-- Single source of truth for the hotspot copy; readable without JS and by crawlers. -->
+    <details class="transcript" id="transcript">
+      <summary><h2>Course notes — prefer to read the round?</h2></summary>
+      <ol>
+        <li data-spot="fox">
+          <p class="t-eyebrow">The Hook</p>
+          <h3>The fox is already running</h3>
+          <p>Your legacy codebase did not steal itself. Every quarter it sits, the rewrite gets bigger, the team gets slower, and the fox gets another ball. The phone booth works whenever you are ready.</p>
+        </li>
+        <li data-spot="caddie">
+          <p class="t-eyebrow">The Problem</p>
+          <h3>The bag only gets heavier</h3>
+          <p>Fifteen years of features. Five frameworks. One exhausted team carrying all of it up the hill. We carry exactly this.</p>
+        </li>
+        <li data-spot="crew">
+          <p class="t-eyebrow">The Method</p>
+          <h3>A fleet mows faster than a mower</h3>
+          <p>Not one AI assistant. A crew of purpose-built agents, each with its own stripe, working in parallel under an operator who has shipped since dial-up. That is how 3x happens.</p>
+        </li>
+        <li data-spot="golfer">
+          <p class="t-eyebrow">The Operator</p>
+          <h3>Same swing, better clubs</h3>
+          <p>Gregg has been shipping for 25 years. Kernel hacker in 1997. Cloud pioneer in 2008. Agent fleet operator now. Follow the pink wagon and the breakfast cart for the full round.</p>
+        </li>
+        <li data-spot="wagon">
+          <p class="t-eyebrow">1997</p>
+          <h3>Where the round started</h3>
+          <p>First job: the first web hosting company in Silicon Valley, where Gregg extended the FreeBSD kernel to invent virtual hosting. He was solving infrastructure problems before most of today's legacy code existed.</p>
+        </li>
+        <li data-spot="cart">
+          <p class="t-eyebrow">2008, and the name</p>
+          <h3>Everyone gets a breakfast ball</h3>
+          <p>A breakfast ball is the free do-over on the first tee. Gregg took his in the cloud: encoding.com, the first cloud video transcoding service, built on S3 and EC2 before that was normal, scaled to the biggest names in streaming. Your codebase deserves a do-over too.</p>
+        </li>
+        <li data-spot="board">
+          <p class="t-eyebrow">The Proof</p>
+          <h3>Check the leaderboard</h3>
+          <p>Every name on that board shipped. Engagements run in weeks, not roadmap quarters: migrations landed, coverage up, deploys multiplied. Note who is in last place.</p>
+        </li>
+        <li data-spot="scout">
+          <p class="t-eyebrow">The First Look</p>
+          <h3>Every engagement starts here</h3>
+          <p>A close, honest look at your codebase. You get an audit, a modernization roadmap, and a straight answer about what an agent fleet can and cannot do for it. No committal swing required.</p>
+        </li>
+        <li data-spot="phone">
+          <p class="t-eyebrow">The Call</p>
+          <h3>One conversation</h3>
+          <p>Bring your gnarliest repo. If a fleet will not move the needle, you will hear that too.</p>
+          <a class="t-cta" href="mailto:hello@breakfastball.com">Book a tee time</a>
+        </li>
+        <li data-spot="club">
+          <p class="t-eyebrow">The Club</p>
+          <h3>Members only means you</h3>
+          <p>Breakfastball, LLC. One operator, one offer: legacy modernization by custom agent fleet. Established 1997 in spirit. Check the plaque above the porch.</p>
+        </li>
+      </ol>
+    </details>
+  </div>
+</div>
 
 <div class="scorecard" id="scorecard">
   <span class="sc-label">Scorecard</span>
