@@ -33,7 +33,8 @@
   "name": "Breakfastball, LLC",
   "description": "An AI consultancy for serious legacy code. Legacy modernization by custom agent fleet.",
   "url": "https://breakfastball-tawny.vercel.app/",
-  "email": "hello@breakfastball.com"
+  "email": "hello@breakfastball.com",
+  "award": ["Technical Emmy Award (2020)", "Amazon Startup Challenge Finalist (2007)"]
 }
 </script>
 <style>
@@ -148,7 +149,12 @@
     letter-spacing:.22em;text-transform:uppercase;
     color:var(--ink);
   }
-  .cast .who:nth-child(odd) .nm{color:var(--brick)}
+  .cast .who:nth-of-type(odd) .nm{color:var(--brick)}
+  .cast .kicker{
+    font-family:var(--display);font-weight:600;
+    font-size:9px;letter-spacing:.4em;text-transform:uppercase;
+    color:var(--gold-deep);
+  }
   .cast .who .as{
     display:block;margin-top:2px;
     font-family:var(--body);font-style:italic;
@@ -391,6 +397,66 @@
     color:var(--brick);
     margin-bottom:clamp(18px,3vh,30px);
   }
+  /* pull quote (critic-quote convention) */
+  .quote{
+    max-width:640px;margin:0 auto clamp(28px,4.5vh,48px);
+    font-family:var(--body);font-style:italic;
+    font-size:clamp(14px,1.8vw,18.5px);line-height:1.7;color:var(--ink);
+  }
+  .quote .who{
+    display:block;margin-top:12px;
+    font-family:var(--display);font-style:normal;font-weight:600;
+    font-size:10px;letter-spacing:.32em;text-transform:uppercase;color:var(--ink-soft);
+  }
+
+  /* the methodology: five holes */
+  .method{margin-bottom:clamp(34px,5.5vh,60px)}
+  .method .m-eyebrow{
+    font-family:var(--display);font-weight:600;
+    font-size:10.5px;letter-spacing:.4em;text-transform:uppercase;
+    color:var(--gold-deep);margin-bottom:9px;
+  }
+  .method h2{
+    font-family:var(--display);font-weight:700;
+    font-size:clamp(17px,2.2vw,24px);
+    letter-spacing:.12em;text-transform:uppercase;
+    color:var(--ink);margin-bottom:clamp(12px,2vh,18px);
+  }
+  .method .m-intro{
+    max-width:640px;margin:0 auto clamp(24px,3.5vh,38px);
+    font-family:var(--body);
+    font-size:clamp(13px,1.5vw,15.5px);line-height:1.75;color:var(--ink-soft);
+  }
+  .holes{
+    display:grid;grid-template-columns:repeat(5,minmax(0,1fr));
+    gap:clamp(10px,1.6vw,22px);
+    max-width:1080px;margin:0 auto;text-align:center;
+  }
+  .hole{
+    border:1px solid rgba(44,53,42,.35);
+    background:rgba(255,255,255,.22);
+    padding:clamp(14px,1.8vw,22px) clamp(10px,1.4vw,18px);
+  }
+  .hole .no{
+    display:block;margin-bottom:9px;
+    font-family:var(--display);font-weight:700;
+    font-size:9.5px;letter-spacing:.3em;text-transform:uppercase;
+    color:var(--gold-deep);
+  }
+  .hole h3{
+    font-family:var(--display);font-weight:700;
+    font-size:clamp(11px,1.2vw,14px);letter-spacing:.14em;text-transform:uppercase;
+    color:var(--ink);margin-bottom:9px;
+  }
+  .hole p{
+    font-family:var(--body);
+    font-size:clamp(11.5px,1.15vw,13.5px);line-height:1.65;color:var(--ink-soft);
+  }
+  @media (max-width:980px){
+    .holes{grid-template-columns:1fr;max-width:480px}
+    .hole{padding:16px 18px}
+  }
+
   .billing{
     font-family:var(--billing);
     font-weight:500;
@@ -600,9 +666,9 @@
           <path d="M50 36 C30 36 16 26 12 8 M18 30 q-7 1 -10 -5 q7 -3 10 5 M14 22 q-7 0 -9 -6 q7 -2 9 6 M12 14 q-6 -1 -7 -7 q7 -1 7 7 M24 34 q-6 3 -11 -1 q5 -5 11 1 M32 36 q-5 4 -11 2 q4 -6 11 -2 M41 37 q-4 5 -11 4 q3 -7 11 -4"/>
           <path d="M50 36 C70 36 84 26 88 8 M82 30 q7 1 10 -5 q-7 -3 -10 5 M86 22 q7 0 9 -6 q-7 -2 -9 6 M88 14 q6 -1 7 -7 q-7 -1 -7 7 M76 34 q6 3 11 -1 q-5 -5 -11 1 M68 36 q5 4 11 2 q-4 -6 -11 -2 M59 37 q4 5 11 4 q-3 -7 -11 -4"/>
         </svg>
-        <span>Official Selection</span>
-        <span>AWS Startup Challenge</span>
-        <span class="yr">2008</span>
+        <span>Finalist</span>
+        <span>Amazon Startup Challenge</span>
+        <span class="yr">2007</span>
       </div>
       <p class="presents"><b>Breakfastball, LLC</b> presents an Agent Fleet production</p>
       <div class="laurel">
@@ -610,9 +676,9 @@
           <path d="M50 36 C30 36 16 26 12 8 M18 30 q-7 1 -10 -5 q7 -3 10 5 M14 22 q-7 0 -9 -6 q7 -2 9 6 M12 14 q-6 -1 -7 -7 q7 -1 7 7 M24 34 q-6 3 -11 -1 q5 -5 11 1 M32 36 q-5 4 -11 2 q4 -6 11 -2 M41 37 q-4 5 -11 4 q3 -7 11 -4"/>
           <path d="M50 36 C70 36 84 26 88 8 M82 30 q7 1 10 -5 q-7 -3 -10 5 M86 22 q7 0 9 -6 q-7 -2 -9 6 M88 14 q6 -1 7 -7 q-7 -1 -7 7 M76 34 q6 3 11 -1 q-5 -5 -11 1 M68 36 q5 4 11 2 q-4 -6 -11 -2 M59 37 q4 5 11 4 q-3 -7 -11 -4"/>
         </svg>
-        <span>Shipping in the Valley</span>
-        <span>Since Dial-Up</span>
-        <span class="yr">1997</span>
+        <span>Winner</span>
+        <span>Technical Emmy Award</span>
+        <span class="yr">2020</span>
       </div>
     </div>
 
@@ -630,14 +696,16 @@
 
 <div class="stage">
   <aside class="cast cast-left">
-    <span class="who"><span class="nm">Gregg</span><span class="as">the operator</span></span>
-    <span class="who"><span class="nm">An Overloaded Caddie</span><span class="as">the problem</span></span>
-    <span class="who"><span class="nm">A Woman with a Telescope</span><span class="as">the first look</span></span>
+    <span class="kicker">Starring the fleet</span>
+    <span class="who"><span class="nm">The Legacy Excavator</span><span class="as">reads every haunted corner</span></span>
+    <span class="who"><span class="nm">The Architect</span><span class="as">draws the new stack</span></span>
+    <span class="who"><span class="nm">The Orchestrator</span><span class="as">keeps tokens under par</span></span>
   </aside>
   <aside class="cast cast-right">
-    <span class="who"><span class="nm">A Fox in a Bowtie</span><span class="as">the hook</span></span>
-    <span class="who"><span class="nm">Twin Groundskeepers</span><span class="as">the method</span></span>
-    <span class="who"><span class="nm">The Ninth Hole Breakfast Cart</span><span class="as">est. 2008</span></span>
+    <span class="kicker">With</span>
+    <span class="who"><span class="nm">The Builders</span><span class="as">in parallel, one stripe each</span></span>
+    <span class="who"><span class="nm">The Compliance Agent</span><span class="as">guards the course rules</span></span>
+    <span class="who"><span class="nm">QA &amp; Acceptance</span><span class="as">call every score</span></span>
     <span class="who"><span class="nm">and Your Legacy Codebase</span><span class="as">currently +14</span></span>
   </aside>
   <p class="introducing">and introducing <b>ten secrets</b> hidden in frame — find the phone booth</p>
@@ -699,8 +767,53 @@
   <div class="band-inner">
     <p class="tagline">Every codebase deserves a breakfast ball.</p>
 
+    <blockquote class="quote">
+      “I have told builders what to build in plain language for twenty-five years.
+      The builders are agents now. The language still works.”
+      <span class="who">Gregg · the operator</span>
+    </blockquote>
+
+    <section class="method" aria-labelledby="methodTitle">
+      <p class="m-eyebrow">The Methodology</p>
+      <h2 id="methodTitle">How a round is played</h2>
+      <p class="m-intro">Every engagement fields a fleet established for your codebase —
+      legacy excavator, architect, orchestrator, builders, compliance and QA agents — each
+      with a defined role and engineered context: the right slice of the repo, the right
+      constraints, a clear definition of done. Context engineering keeps every agent's
+      tokens under par, so costs stay as predictable as the schedule. One operator who knows
+      what an enterprise SaaS stack should look like directs the round; the fleet plays it
+      in parallel.</p>
+      <div class="holes">
+        <div class="hole">
+          <span class="no">Hole 1</span>
+          <h3>The Walk-Through</h3>
+          <p>The legacy excavator goes in first: every module, migration, and haunted corner of the codebase, mapped.</p>
+        </div>
+        <div class="hole">
+          <span class="no">Hole 2</span>
+          <h3>The Excavation</h3>
+          <p>The business logic your company actually runs on is dug out and separated from the framework it is stuck in.</p>
+        </div>
+        <div class="hole">
+          <span class="no">Hole 3</span>
+          <h3>The Re-Architecture</h3>
+          <p>A modern enterprise stack is designed around that logic — boring where it should be boring, fast where it counts.</p>
+        </div>
+        <div class="hole">
+          <span class="no">Hole 4</span>
+          <h3>The Rebuild</h3>
+          <p>The fleet builds in parallel, with tests as the scorecard. Weeks, not quarters.</p>
+        </div>
+        <div class="hole">
+          <span class="no">Hole 5</span>
+          <h3>The Handover</h3>
+          <p>Your team takes the bag: documentation, CI, security posture, and a development cadence that keeps climbing after we leave.</p>
+        </div>
+      </div>
+    </section>
+
     <p class="billing">
-      Breakfastball LLC presents <span class="qt">“Breakfastball”</span> starring <span class="nm">Your Legacy Codebase</span> with <span class="nm">A Custom Agent Fleet</span> and <span class="nm">A Fox</span> · kernel work <span class="nm">Gregg</span> (1997) · cloud transcoding <span class="nm">encoding.com</span> (2008) · media inspection <span class="nm">probe.dev</span> · casting by <span class="nm">25 Years of Shipping</span> · director of modernization <span class="nm">Gregg</span> · engagements measured in <span class="nm">Weeks, Not Quarters</span>
+      Breakfastball LLC presents <span class="qt">“Breakfastball”</span> starring <span class="nm">Your Legacy Codebase</span> with <span class="nm">A Custom Agent Fleet</span> and <span class="nm">A Fox</span> · kernel work <span class="nm">Gregg</span> (1997) · e-commerce pioneered <span class="nm">Cart, Gateway &amp; Hosting, Bundled</span> (early 2000s) · bespoke software <span class="nm">Two Decades of It</span> · cloud transcoding <span class="nm">encoding.com</span> (2008) · statuette <span class="nm">A Technical Emmy</span> (2020) · media inspection <span class="nm">probe.dev</span> · token budgets <span class="nm">Under Par</span> · casting by <span class="nm">25 Years of Shipping</span> · director of modernization <span class="nm">Gregg</span> · engagements measured in <span class="nm">Weeks, Not Quarters</span>
     </p>
 
     <div class="bottomrow">
@@ -731,12 +844,12 @@
         <li data-spot="crew">
           <p class="t-eyebrow">The Method</p>
           <h3>A fleet mows faster than a mower</h3>
-          <p>Not one AI assistant. A crew of purpose-built agents, each with its own stripe, working in parallel under an operator who has shipped since dial-up. That is how 3x happens.</p>
+          <p>Not one assistant — a fleet established for your codebase: a legacy excavator, an architect, parallel builders, compliance and QA agents, an orchestrator keeping tokens under par. Each carries engineered context: the right slice of the repo, a defined role, a definition of done. That is how 3x happens.</p>
         </li>
         <li data-spot="golfer">
           <p class="t-eyebrow">The Operator</p>
           <h3>Same swing, better clubs</h3>
-          <p>Gregg has been shipping for 25 years. Kernel hacker in 1997. Cloud pioneer in 2008. Agent fleet operator now. Follow the pink wagon and the breakfast cart for the full round.</p>
+          <p>Gregg has directed builders in plain language for 25 years — kernel hackers, contractors, in-house teams. Agents are the same job with a faster swing. Kernel work in 1997. Cloud pioneer in 2008. Fleet operator now.</p>
         </li>
         <li data-spot="wagon">
           <p class="t-eyebrow">1997</p>
@@ -746,17 +859,17 @@
         <li data-spot="cart">
           <p class="t-eyebrow">2008, and the name</p>
           <h3>Everyone gets a breakfast ball</h3>
-          <p>A breakfast ball is the free do-over on the first tee. Gregg took his in the cloud: encoding.com, the first cloud video transcoding service, built on S3 and EC2 before that was normal, scaled to the biggest names in streaming. Your codebase deserves a do-over too.</p>
+          <p>A breakfast ball is the free do-over on the first tee. Gregg took his in the cloud: encoding.com, the first cloud video transcoding service, built on S3 and EC2 before that was normal, scaled to the biggest names in streaming — work that earned a Technical Emmy in 2020. Your codebase deserves a do-over too.</p>
         </li>
         <li data-spot="board">
           <p class="t-eyebrow">The Proof</p>
           <h3>Check the leaderboard</h3>
-          <p>Every name on that board shipped. Engagements run in weeks, not roadmap quarters: migrations landed, coverage up, deploys multiplied. Note who is in last place.</p>
+          <p>Every name on that board shipped. Rounds run in weeks, not roadmap quarters: platforms with fifteen years of history re-architected and back on the tee — coverage up, deploys multiplied, teams unblocked. Note who is in last place.</p>
         </li>
         <li data-spot="scout">
           <p class="t-eyebrow">The First Look</p>
           <h3>Every engagement starts here</h3>
-          <p>A close, honest look at your codebase. You get an audit, a modernization roadmap, and a straight answer about what an agent fleet can and cannot do for it. No committal swing required.</p>
+          <p>Every round starts through the glass: the legacy excavator walks your codebase and excavates the business logic buried in it. You get an audit, a re-architecture roadmap, and a straight answer about what a fleet can and cannot do. No committal swing required.</p>
         </li>
         <li data-spot="phone">
           <p class="t-eyebrow">The Call</p>
@@ -767,7 +880,7 @@
         <li data-spot="club">
           <p class="t-eyebrow">The Club</p>
           <h3>Members only means you</h3>
-          <p>Breakfastball, LLC. One operator, one offer: legacy modernization by custom agent fleet. Established 1997 in spirit. Check the plaque above the porch.</p>
+          <p>Breakfastball, LLC. One operator, one offer: legacy modernization by custom agent fleet. The clubhouse has been open since 1997 — hosting, then the early-2000s pro shop (cart, gateway, and hosting account, bundled), then cloud video, now fleets. Check the plaque above the porch.</p>
         </li>
       </ol>
     </details>
