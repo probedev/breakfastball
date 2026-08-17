@@ -1055,7 +1055,6 @@
             <li><b>2022</b>Successful exit of Encoding.com</li>
             <li><b>Now</b>Managing Agent Fleets — before …</li>
           </ul>
-          <p>The sign painter wrote 1927 and would not come back up the ladder.</p>
         </li>
       </ol>
     </details>
@@ -1234,8 +1233,10 @@
   // front nine: the nine scored secrets, in card order; the phone booth is the 19th hole
   const HOLES=['fox','caddie','crew','golfer','wagon','cart','board','scout','club'];
   const PARS=[4,4,3,5,4,3,4,5,4];
+  // only the genuinely hard finds earn a birdie; the rest are pars
+  const BIRDIE_HOLES=new Set(['fox','wagon','scout']);
   const found=new Set();
-  let total=0, allBirdies=true;
+  let total=0, bogeys=0;
 
   let active=null, pinned=false, hoverTimer=null, closeTimer=null;
 
@@ -1264,6 +1265,7 @@
     }
   }
   function closeCard(){
+    clearTimeout(hoverTimer);clearTimeout(closeTimer);
     active=null;pinned=false;
     card.classList.remove('open');
     scorecard.classList.remove('dipped');
@@ -1276,19 +1278,22 @@
     found.add(id);
     const idx=HOLES.indexOf(id);
     const hinted=scene.classList.contains('hints');
-    const score=PARS[idx]+(hinted?1:-1);
-    if(hinted)allBirdies=false;
+    const kind=hinted?'bogey':(BIRDIE_HOLES.has(id)?'birdie':'par');
+    const score=PARS[idx]+(kind==='bogey'?1:kind==='birdie'?-1:0);
+    if(kind==='bogey')bogeys++;
     total+=score;
     const cell=scorecard.querySelector('td[data-hole="'+id+'"]');
-    if(cell)cell.innerHTML='<span class="sc-mark '+(hinted?'bogey':'birdie')+'">'+score+'</span>';
+    if(cell)cell.innerHTML=kind==='par'
+      ? '<span class="sc-mark">'+score+'</span>'
+      : '<span class="sc-mark '+kind+'">'+score+'</span>';
     scOut.textContent=total;
-    scLive.textContent='Hole '+(idx+1)+': '+(hinted?'bogey':'birdie')+'. '+found.size+' of 9 found.';
+    scLive.textContent='Hole '+(idx+1)+': '+kind+'. '+found.size+' of 9 found.';
     if(found.size===HOLES.length){
       scorecard.classList.add('perfect');
       const diff=total-36;
       scLegend.style.display='block';
-      scLegend.textContent=allBirdies
-        ? total+' · nine under par — a perfect round'
+      scLegend.textContent=bogeys===0
+        ? total+' · '+(-diff)+' under par — a career round'
         : (diff<0 ? total+' · '+(-diff)+' under par — well played'
            : diff===0 ? total+' · level par — respectable'
            : total+' · '+diff+' over par — the caddie sends his regards');
@@ -1317,6 +1322,7 @@
     }
     btn.addEventListener('click',e=>{
       e.stopPropagation();
+      clearTimeout(hoverTimer);clearTimeout(closeTimer);
       if(active===id&&pinned){closeCard();return}
       pinned=true;openCard(id);
     });
