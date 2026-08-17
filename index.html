@@ -560,6 +560,96 @@
   }
   .transcript .t-cta:hover{background:var(--gold);border-color:var(--gold);color:#2e2a24}
 
+  /* ---------- tee time booking sheet ---------- */
+  .tee-dialog{
+    width:min(92vw,660px);
+    max-height:min(88vh,860px);
+    border:1px solid #b39a63;
+    background:var(--cream);
+    color:#2e2a24;
+    box-shadow:0 30px 90px rgba(20,24,18,.55), inset 0 0 0 4px var(--cream), inset 0 0 0 5px #c9b078;
+    padding:clamp(22px,3.5vw,38px) clamp(20px,3.5vw,42px) clamp(20px,3vw,32px);
+    margin:auto;
+  }
+  .tee-dialog::backdrop{background:rgba(24,32,23,.6)}
+  .tee-dialog .close{
+    position:absolute;top:10px;right:12px;
+    background:none;border:none;cursor:pointer;
+    font-family:var(--display);font-size:17px;
+    color:#9a7b3c;padding:6px;line-height:1;
+  }
+  .tee-dialog .c-eyebrow{
+    font-family:var(--display);font-weight:600;
+    font-size:10px;letter-spacing:.4em;text-transform:uppercase;
+    color:#9a7b3c;margin-bottom:8px;text-align:center;
+  }
+  .tee-dialog h2{
+    font-family:var(--display);font-weight:700;
+    font-size:clamp(18px,2.6vw,26px);letter-spacing:.08em;text-transform:uppercase;
+    margin-bottom:10px;text-align:center;
+  }
+  .tt-sub{
+    font-family:var(--body);font-style:italic;
+    font-size:clamp(12.5px,1.5vw,14.5px);line-height:1.6;color:#6b6353;
+    text-align:center;margin-bottom:clamp(16px,2.5vh,24px);
+  }
+  .tt-grid{
+    display:grid;grid-template-columns:1fr 1fr;
+    gap:clamp(14px,2vh,20px) clamp(16px,2.5vw,26px);
+    text-align:left;
+  }
+  .tt-grid label{
+    display:block;
+    font-family:var(--display);font-weight:600;
+    font-size:9px;letter-spacing:.28em;text-transform:uppercase;
+    color:#9a7b3c;
+  }
+  .tt-grid label .hint{
+    display:block;margin-top:1px;
+    font-family:var(--body);font-style:italic;font-weight:400;
+    font-size:10.5px;letter-spacing:0;text-transform:none;color:#a99d82;
+  }
+  .tt-grid .wide{grid-column:1 / -1}
+  .tt-grid input,.tt-grid select,.tt-grid textarea{
+    display:block;width:100%;margin-top:6px;
+    font-family:var(--body);font-size:14px;color:#2e2a24;
+    background:rgba(255,255,255,.35);
+    border:none;border-bottom:1px solid #b39a63;
+    padding:7px 8px 6px;border-radius:0;
+    outline:none;
+  }
+  .tt-grid textarea{min-height:56px;resize:vertical;line-height:1.5}
+  .tt-grid select{appearance:none;-webkit-appearance:none;cursor:pointer;
+    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='9' height='6'%3E%3Cpath d='M0 0l4.5 6L9 0z' fill='%239a7b3c'/%3E%3C/svg%3E");
+    background-repeat:no-repeat;background-position:right 8px center;
+  }
+  .tt-grid input:focus,.tt-grid select:focus,.tt-grid textarea:focus{
+    border-bottom:2px solid var(--hedge);padding-bottom:5px;
+  }
+  .hp{position:absolute;left:-6000px;top:0;height:1px;width:1px;overflow:hidden}
+  .tt-actions{text-align:center;margin-top:clamp(18px,3vh,26px)}
+  .tt-submit{
+    font-family:var(--display);font-weight:600;
+    font-size:clamp(11px,1.3vw,13px);letter-spacing:.3em;text-transform:uppercase;
+    color:var(--cream);background:var(--hedge);
+    border:1px solid var(--hedge);cursor:pointer;
+    padding:11px 26px;
+    transition:background .2s ease,color .2s ease;
+  }
+  .tt-submit:hover{background:var(--gold);border-color:var(--gold);color:#2e2a24}
+  .tt-submit[disabled]{opacity:.6;cursor:wait}
+  .tt-note{
+    margin-top:12px;font-family:var(--body);font-style:italic;
+    font-size:12px;color:#a03c28;line-height:1.6;text-align:center;
+  }
+  .tt-done{text-align:center;padding:clamp(10px,2vh,20px) 0}
+  .tt-done p{font-family:var(--body);font-size:14.5px;line-height:1.7;color:#57503f;max-width:400px;margin:0 auto}
+  .tt-done .tt-submit{margin-top:20px}
+  @media (max-width:640px){
+    .tee-dialog{width:100vw;max-width:100vw;max-height:94vh}
+    .tt-grid{grid-template-columns:1fr}
+  }
+
   footer{
     text-align:center;
     padding:clamp(18px,3vh,30px) 20px 110px;
@@ -847,7 +937,7 @@
         <div class="why"><span>Rated 3X for</span><span>Accelerated Development</span></div>
       </div>
       <div class="release">
-        Now accepting engagements · <a href="mailto:hello@breakfastball.com">Book a tee time</a>
+        Now accepting engagements · <a href="#tee-time">Book a tee time</a>
         <small>Hickory Heights · Established 1997</small>
       </div>
     </div>
@@ -900,7 +990,7 @@
           <p class="t-eyebrow">The Call</p>
           <h3>One conversation</h3>
           <p>Bring your gnarliest repo. If a fleet will not move the needle, you will hear that too.</p>
-          <a class="t-cta" href="mailto:hello@breakfastball.com">Book a tee time</a>
+          <a class="t-cta" href="#tee-time">Book a tee time</a>
         </li>
         <li data-spot="club">
           <p class="t-eyebrow">The Club</p>
@@ -939,10 +1029,94 @@
   <div class="sc-side">
     <p class="sc-legend" id="scLegend"><span class="sc-mark birdie"></span> birdie &nbsp;·&nbsp; <span class="sc-mark bogey"></span> bogey, caddie helped</p>
     <button class="hintbtn" id="hintBtn" aria-pressed="false">Ask the caddie</button>
-    <a class="perfect-cta" href="mailto:hello@breakfastball.com">Play the 19th hole</a>
+    <a class="perfect-cta" href="#tee-time">Play the 19th hole</a>
   </div>
   <span class="visually-hidden" id="scLive" aria-live="polite"></span>
 </div>
+
+<dialog class="tee-dialog" id="teeTime" aria-labelledby="ttTitle">
+  <button type="button" class="close" id="ttClose" aria-label="Close">✕</button>
+  <form id="ttForm">
+    <p class="c-eyebrow">The 19th Hole</p>
+    <h2 id="ttTitle">Book a tee time</h2>
+    <p class="tt-sub">The starter asks every member the same questions. Answer what you can — the caddie fills in the rest on the first walk-through.</p>
+    <div class="tt-grid">
+      <label>Player
+        <input name="name" autocomplete="name" placeholder="Your name">
+      </label>
+      <label>Clubhouse
+        <input name="company" autocomplete="organization" placeholder="Company">
+      </label>
+      <label class="wide">Where the starter reaches you
+        <input type="email" name="email" required autocomplete="email" placeholder="you@company.com">
+      </label>
+      <label class="wide">The course
+        <span class="hint">What does the codebase do? One sentence is fine.</span>
+        <input name="course" required placeholder="e.g. claims processing for regional insurers">
+      </label>
+      <label class="wide">Course conditions
+        <span class="hint">The stack as it stands — languages, frameworks, databases, where it runs.</span>
+        <textarea name="stack" required placeholder="e.g. Rails 4 monolith, MySQL, jQuery front end, one very load-bearing cron server"></textarea>
+      </label>
+      <label>Age of the course
+        <select name="age">
+          <option value="">The starter will ask</option>
+          <option>Under 5 years</option>
+          <option>5–10 years</option>
+          <option>10–15 years</option>
+          <option>15+ years — deep in the back nine</option>
+        </select>
+      </label>
+      <label>Party size
+        <span class="hint">Engineers who play it today.</span>
+        <select name="party">
+          <option value="">The starter will ask</option>
+          <option>Solo</option>
+          <option>2–5</option>
+          <option>6–15</option>
+          <option>16–50</option>
+          <option>50+</option>
+        </select>
+      </label>
+      <label>The hazard
+        <span class="hint">What hurts most.</span>
+        <select name="hazard">
+          <option value="">The starter will ask</option>
+          <option>Velocity has slowed</option>
+          <option>Nobody will touch it</option>
+          <option>Hiring for the stack is impossible</option>
+          <option>Security &amp; compliance</option>
+          <option>It will not scale</option>
+          <option>A rewrite stalled</option>
+          <option>Something else</option>
+        </select>
+      </label>
+      <label>Preferred tee time
+        <select name="when">
+          <option value="">The starter will ask</option>
+          <option>This month — we are bleeding</option>
+          <option>This quarter</option>
+          <option>Next quarter</option>
+          <option>Just walking the course</option>
+        </select>
+      </label>
+      <label class="wide">For the caddie
+        <textarea name="notes" placeholder="Anything else worth knowing before the first swing."></textarea>
+      </label>
+      <input class="hp" name="website" tabindex="-1" autocomplete="off" aria-hidden="true">
+    </div>
+    <div class="tt-actions">
+      <button type="submit" class="tt-submit" id="ttSubmit">Request tee time</button>
+      <p class="tt-note" id="ttNote" hidden></p>
+    </div>
+  </form>
+  <div class="tt-done" id="ttDone" hidden>
+    <p class="c-eyebrow">Confirmed</p>
+    <h2>You are on the tee sheet</h2>
+    <p>The starter reads every request personally and replies within one business day. Warm up your gnarliest repo.</p>
+    <button type="button" class="tt-submit" id="ttDoneClose">Back to the course</button>
+  </div>
+</dialog>
 
 <footer>
   <p>Breakfastball, LLC · <a href="mailto:hello@breakfastball.com">hello@breakfastball.com</a> · Hickory Heights, Established 1997</p>
@@ -1095,6 +1269,61 @@
     const on=scene.classList.toggle('hints');
     hintBtn.setAttribute('aria-pressed',String(on));
     hintBtn.textContent=on?'Thanks, caddie':'Ask the caddie';
+  });
+
+  /* ---- tee time booking sheet ---- */
+  const tee=document.getElementById('teeTime');
+  const ttForm=document.getElementById('ttForm');
+  const ttDone=document.getElementById('ttDone');
+  const ttNote=document.getElementById('ttNote');
+  const ttSubmit=document.getElementById('ttSubmit');
+  function openTee(){
+    closeCard();
+    ttForm.hidden=false;ttDone.hidden=true;ttNote.hidden=true;
+    tee.showModal();
+  }
+  document.addEventListener('click',e=>{
+    const a=e.target.closest('a[href$="#tee-time"]');
+    if(a){e.preventDefault();openTee();}
+  });
+  document.getElementById('ttClose').addEventListener('click',()=>tee.close());
+  document.getElementById('ttDoneClose').addEventListener('click',()=>tee.close());
+  tee.addEventListener('click',e=>{if(e.target===tee)tee.close()});
+
+  ttForm.addEventListener('submit',async e=>{
+    e.preventDefault();
+    const data=Object.fromEntries(new FormData(ttForm));
+    ttSubmit.disabled=true;
+    const label=ttSubmit.textContent;
+    ttSubmit.textContent='Calling the starter…';
+    let delivered=false;
+    try{
+      const r=await fetch('/api/tee-time',{
+        method:'POST',
+        headers:{'Content-Type':'application/json'},
+        body:JSON.stringify(data)
+      });
+      delivered=r.ok;
+    }catch(_){delivered=false}
+    ttSubmit.disabled=false;
+    ttSubmit.textContent=label;
+    if(delivered){
+      ttForm.hidden=true;
+      ttDone.hidden=false;
+      return;
+    }
+    // pro shop line is down: draft the same request as an email instead
+    const body=[
+      ['Player',data.name],['Clubhouse',data.company],['Email',data.email],
+      ['The course',data.course],['Course conditions',data.stack],
+      ['Age of the course',data.age],['Party size',data.party],
+      ['The hazard',data.hazard],['Preferred tee time',data.when],['For the caddie',data.notes]
+    ].map(([k,v])=>k+': '+(v||'—')).join('\n');
+    location.href='mailto:hello@breakfastball.com?subject='+
+      encodeURIComponent('Tee time request — '+(data.name||data.company||data.email))+
+      '&body='+encodeURIComponent(body);
+    ttNote.textContent='The pro shop phone line is down, so we drafted your request as an email instead — send it and the starter will reply.';
+    ttNote.hidden=false;
   });
 
   if(!reduced&&!coarse){

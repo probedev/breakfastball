@@ -57,6 +57,21 @@ Hosted on Vercel as a static site (no framework preset, no build command).
 Pushing to `main` auto-deploys via the connected GitHub repo
 (`probedev/breakfastball` → breakfastball-tawny.vercel.app).
 
+## Contact form (tee time requests)
+
+"Book a tee time" opens a booking-sheet dialog; submissions POST to
+`api/tee-time.js` (a Vercel serverless function). Delivery uses Resend —
+set these in the Vercel project (Settings → Environment Variables):
+
+- `RESEND_API_KEY` — from https://resend.com (free tier is plenty)
+- `TEE_TIME_TO` — where requests are delivered
+- `TEE_TIME_FROM` — optional; defaults to `onboarding@resend.dev` (fine until
+  a custom domain is verified in Resend)
+
+Until the env vars are set, the function returns 503 and the form falls back
+to drafting a pre-filled `mailto:` in the visitor's mail client, so no request
+is lost. A honeypot field silently drops bot submissions.
+
 ## TODO before launch
 
 - Confirm the contact address — `hello@breakfastball.com` is a placeholder used in the
