@@ -345,7 +345,7 @@
     opacity:0;
     pointer-events:none;
     transition:opacity .3s ease, transform .3s ease;
-    z-index:30;
+    z-index:65;
   }
   .card.open{opacity:1;pointer-events:auto;transform:translate(-50%,0)}
   .card .c-eyebrow{
@@ -680,7 +680,9 @@
     font-family:var(--display);
     z-index:60;
     max-width:96vw;
+    transition:opacity .25s ease;
   }
+  .scorecard.dipped{opacity:.12;pointer-events:none}
   .sc-head{
     display:flex;flex-direction:column;align-items:center;gap:2px;
     padding-right:2px;text-align:center;
@@ -1002,7 +1004,7 @@
         <li data-spot="club">
           <p class="t-eyebrow">The Club</p>
           <h3>Members only means you</h3>
-          <p>Breakfastball, LLC. One operator, one offer: legacy modernization by custom agent fleet. The clubhouse has been open since 1997 — hosting, then the early-2000s pro shop (cart, gateway, and hosting account, bundled), then cloud video, now fleets. The sign painter wrote 1927 and would not come back up the ladder.</p>
+          <p>Breakfastball, LLC. One operator, one habit: virtualizing infrastructure before the tooling has a name. Virtual hosts in the FreeBSD kernel, 1997 — before vhost. Virtual private servers, 2000 — before containers. Orchestrating EC2 and object storage, 2007 — before Kubernetes. Massive multi-cloud, 2015 — before Terraform. Agent fleets, now. The sign painter wrote 1927 and would not come back up the ladder.</p>
         </li>
       </ol>
     </details>
@@ -1199,12 +1201,17 @@
     if(s.cta){cCta.textContent=s.cta.label;cCta.href=s.cta.href;cCta.style.display='inline-block'}
     else{cCta.style.display='none'}
     card.classList.add('open');
+    scorecard.classList.add('dipped');
     spotlight(id);
     mark(id);
+    if(pinned&&!coarse){
+      requestAnimationFrame(()=>card.scrollIntoView({block:'nearest',behavior:reduced?'auto':'smooth'}));
+    }
   }
   function closeCard(){
     active=null;pinned=false;
     card.classList.remove('open');
+    scorecard.classList.remove('dipped');
     scene.classList.remove('lit');
   }
   function mark(id){
