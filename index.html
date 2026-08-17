@@ -1,0 +1,694 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Breakfastball · An AI Consultancy for Serious Legacy Code</title>
+<meta name="description" content="Breakfastball is an AI consultancy for serious legacy code — modernization by custom agent fleet, run by an operator who has shipped since 1997. Ten secrets are hidden on the course. Find the phone booth.">
+<meta name="color-scheme" content="dark">
+<meta name="theme-color" content="#31482f">
+<link rel="canonical" href="https://breakfastball.vercel.app/">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Breakfastball">
+<meta property="og:title" content="Breakfastball · An AI Consultancy for Serious Legacy Code">
+<meta property="og:description" content="Legacy modernization by custom agent fleet. Ten secrets are hidden on the course. Find the phone booth.">
+<meta property="og:url" content="https://breakfastball.vercel.app/">
+<meta property="og:image" content="https://breakfastball.vercel.app/assets/og.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Breakfastball · An AI Consultancy for Serious Legacy Code">
+<meta name="twitter:description" content="Legacy modernization by custom agent fleet. Ten secrets are hidden on the course. Find the phone booth.">
+<meta name="twitter:image" content="https://breakfastball.vercel.app/assets/og.jpg">
+<link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+<link rel="icon" href="assets/favicon.png" type="image/png" sizes="48x48">
+<link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Jost:wght@500;600;700&family=Libre+Caslon+Text:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "ProfessionalService",
+  "name": "Breakfastball, LLC",
+  "description": "An AI consultancy for serious legacy code. Legacy modernization by custom agent fleet.",
+  "url": "https://breakfastball.vercel.app/",
+  "email": "hello@breakfastball.com"
+}
+</script>
+<style>
+  :root{
+    --hedge:#31482f;
+    --fairway:#6b9b5f;
+    --pink:#e8b4b0;
+    --mint:#a8cfb5;
+    --mustard:#d9a62e;
+    --cream:#f2e9d8;
+    --cream-deep:#e6d9bf;
+    --ink:#2e2a24;
+    --display:'Jost',futura-pt,Futura,'Century Gothic',sans-serif;
+    --body:'Libre Caslon Text',Georgia,serif;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{
+    background:var(--hedge);
+    background-image:radial-gradient(ellipse 120% 80% at 50% -10%, #3d5839 0%, var(--hedge) 55%, #263a25 100%);
+    color:var(--cream);
+    font-family:var(--body);
+    min-height:100vh;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    overflow-x:hidden;
+  }
+
+  /* ---------- header ---------- */
+  header{
+    text-align:center;
+    padding:clamp(28px,4.5vh,52px) 20px 0;
+    max-width:900px;
+  }
+  .eyebrow{
+    font-family:var(--display);
+    font-weight:500;
+    font-size:clamp(10px,1.2vw,12px);
+    letter-spacing:.42em;
+    text-transform:uppercase;
+    color:var(--mint);
+    margin-bottom:14px;
+  }
+  .eyebrow::before,.eyebrow::after{content:"·";margin:0 14px;color:var(--mustard)}
+  h1{
+    font-family:var(--display);
+    font-weight:700;
+    font-size:clamp(34px,6vw,64px);
+    letter-spacing:.18em;
+    text-transform:uppercase;
+    color:var(--cream);
+    line-height:1.05;
+  }
+  h1 .ball{color:var(--mustard)}
+  .sub{
+    font-family:var(--body);
+    font-style:italic;
+    font-size:clamp(14px,1.6vw,17px);
+    color:#cfdcc8;
+    margin-top:14px;
+    line-height:1.6;
+  }
+  .sub b{font-style:normal;color:var(--mustard);font-weight:700}
+
+  /* ---------- proscenium / scene ---------- */
+  .stage{
+    position:relative;
+    margin:clamp(20px,3.5vh,36px) auto clamp(80px,12vh,110px);
+    width:min(92vw, 78vh, 980px);
+  }
+  .frame{
+    position:relative;
+    border:1px solid var(--mustard);
+    outline:1px solid rgba(217,166,46,.35);
+    outline-offset:6px;
+    box-shadow:0 30px 80px rgba(0,0,0,.5), 0 6px 20px rgba(0,0,0,.4);
+    background:#000;
+  }
+  .scene{
+    position:relative;
+    overflow:hidden;
+    container-type:inline-size;
+    aspect-ratio:1/1;
+  }
+  .scene-inner{
+    position:absolute; inset:-1.6%;
+    transition:transform .2s ease-out;
+    will-change:transform;
+  }
+  .scene-inner img{
+    position:absolute; inset:0;
+    width:100%; height:100%;
+    object-fit:cover;
+    display:block;
+    animation:breathe 70s ease-in-out infinite alternate;
+  }
+  @keyframes breathe{from{transform:scale(1)}to{transform:scale(1.018)}}
+
+  /* drifting clouds */
+  .cloud{
+    position:absolute;
+    background:radial-gradient(closest-side, rgba(255,255,255,.55), rgba(255,255,255,0));
+    filter:blur(6px);
+    opacity:.16;
+    border-radius:50%;
+    pointer-events:none;
+  }
+  .cloud.c1{width:26%;height:7%;top:6%;left:-28%;animation:drift 140s linear infinite}
+  .cloud.c2{width:18%;height:5%;top:12%;left:-20%;animation:drift 190s linear infinite;animation-delay:-70s}
+  @keyframes drift{to{transform:translateX(560%)}}
+
+  /* film grain + vignette */
+  .grain{
+    position:absolute;inset:0;pointer-events:none;opacity:.5;mix-blend-mode:overlay;
+    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='240' height='240'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='240' height='240' filter='url(%23n)' opacity='0.35'/%3E%3C/svg%3E");
+  }
+  .vignette{
+    position:absolute;inset:0;pointer-events:none;
+    box-shadow:inset 0 0 12cqi rgba(30,25,10,.35);
+  }
+
+  /* dim + spotlight */
+  .dim{
+    position:absolute;inset:0;pointer-events:none;
+    background:rgba(18,26,18,.62);
+    opacity:0;
+    transition:opacity .35s ease;
+    -webkit-mask-image:radial-gradient(ellipse var(--rx,12cqi) var(--ry,12cqi) at var(--hx,50%) var(--hy,50%), transparent 62%, black 100%);
+            mask-image:radial-gradient(ellipse var(--rx,12cqi) var(--ry,12cqi) at var(--hx,50%) var(--hy,50%), transparent 62%, black 100%);
+  }
+  .scene.lit .dim{opacity:1}
+
+  /* leaderboard + plaque overlays (crisp text over garbled paint) */
+  .overlay-board{
+    position:absolute;
+    left:69.6%; top:63.2%; width:12.9%; height:12.6%;
+    background:var(--cream-deep);
+    border:.15cqi solid #7a5c33;
+    border-radius:.3cqi;
+    box-shadow:inset 0 0 .8cqi rgba(90,60,20,.35);
+    font-family:var(--display);
+    color:#3a2f1d;
+    display:flex;flex-direction:column;
+    padding:.35cqi .5cqi;
+    transform:rotate(-.4deg);
+  }
+  .overlay-board .bt{
+    text-align:center;font-weight:700;letter-spacing:.28em;font-size:.85cqi;
+    border-bottom:.08cqi solid #7a5c33;padding-bottom:.2cqi;margin-bottom:.25cqi;
+  }
+  .overlay-board .row{
+    display:flex;justify-content:space-between;align-items:center;
+    font-size:.82cqi;font-weight:600;letter-spacing:.06em;
+    flex:1;
+  }
+  .overlay-board .row .num{width:1.4cqi;color:#8a6a35}
+  .overlay-board .row .nm{flex:1;text-align:left}
+  .overlay-board .row .sc{font-weight:700}
+  .overlay-board .row.you .sc{color:#a03c28}
+  .overlay-board .row.you .nm{color:#a03c28}
+  .plaque{
+    position:absolute;
+    left:54.55%; top:29.75%; width:4.05%; height:1.55%;
+    background:#efe4c9;
+    display:flex;align-items:center;justify-content:center;
+    font-family:var(--display);font-weight:600;
+    font-size:.72cqi;letter-spacing:.14em;color:#4a3b22;
+    border-radius:.15cqi;
+    box-shadow:inset 0 0 .3cqi rgba(90,60,20,.4);
+  }
+
+  /* hotspot hit areas */
+  .hs{
+    position:absolute;
+    background:transparent;
+    border:none;
+    cursor:pointer;
+    border-radius:50%;
+    -webkit-tap-highlight-color:transparent;
+  }
+  .hs:focus-visible{
+    outline:.35cqi dashed var(--mustard);
+    outline-offset:.3cqi;
+  }
+  .hs .ping{
+    position:absolute;left:50%;top:50%;
+    width:1.3cqi;height:1.3cqi;margin:-0.65cqi;
+    border-radius:50%;
+    background:var(--mustard);
+    box-shadow:0 0 0 .35cqi rgba(217,166,46,.35);
+    opacity:0;transform:scale(.4);
+    transition:opacity .4s ease, transform .4s ease;
+    pointer-events:none;
+  }
+  .scene.hints .hs:not(.found) .ping{opacity:.95;transform:scale(1);animation:pulse 1.6s ease-in-out infinite}
+  .hs.found .ping{opacity:0 !important}
+  @keyframes pulse{50%{box-shadow:0 0 0 .9cqi rgba(217,166,46,0)}}
+
+  /* ---------- intertitle card ----------
+     Lives in .frame, not .scene: .scene's container-type applies layout
+     containment, which would trap the mobile position:fixed sheet inside
+     the (overflow:hidden) scene. */
+  .card{
+    position:absolute;
+    left:50%; bottom:3.5%;
+    transform:translate(-50%, 18px);
+    width:min(78%, 560px);
+    background:var(--cream);
+    color:var(--ink);
+    border:1px solid #b39a63;
+    box-shadow:0 18px 50px rgba(0,0,0,.45), inset 0 0 0 4px var(--cream), inset 0 0 0 5px #c9b078;
+    padding:clamp(16px,2.4vw,24px) clamp(18px,2.8vw,27px) clamp(15px,2.2vw,22px);
+    text-align:center;
+    opacity:0;
+    pointer-events:none;
+    transition:opacity .3s ease, transform .3s ease;
+    z-index:30;
+  }
+  .card.open{opacity:1;pointer-events:auto;transform:translate(-50%,0)}
+  .card .c-eyebrow{
+    font-family:var(--display);font-weight:600;
+    font-size:clamp(9px,1.15vw,12px);letter-spacing:.4em;text-transform:uppercase;
+    color:#9a7b3c;margin-bottom:clamp(6px,.9vw,9px);
+  }
+  .card h2{
+    font-family:var(--display);font-weight:700;
+    font-size:clamp(16px,2.5vw,26px);letter-spacing:.06em;text-transform:uppercase;
+    margin-bottom:clamp(7px,1.1vw,11px);line-height:1.15;
+  }
+  .card p{
+    font-family:var(--body);
+    font-size:clamp(12.5px,1.65vw,16.5px);
+    line-height:1.62;
+  }
+  .card p b{font-weight:700}
+  .card .cta{
+    display:inline-block;margin-top:clamp(11px,1.6vw,16px);
+    font-family:var(--display);font-weight:600;
+    font-size:clamp(10px,1.3vw,13px);letter-spacing:.3em;text-transform:uppercase;
+    color:var(--cream);background:var(--hedge);
+    padding:clamp(7px,1vw,10px) clamp(15px,2.2vw,22px);text-decoration:none;
+    border:1px solid var(--hedge);
+    transition:background .2s ease,color .2s ease;
+  }
+  .card .cta:hover{background:var(--mustard);border-color:var(--mustard);color:var(--ink)}
+  .card .close{
+    position:absolute;top:clamp(5px,.7vw,7px);right:clamp(6px,.9vw,9px);
+    background:none;border:none;cursor:pointer;
+    font-family:var(--display);font-size:clamp(13px,1.8vw,18px);
+    color:#9a7b3c;padding:4px;line-height:1;
+  }
+
+  /* ---------- scorecard ---------- */
+  .scorecard{
+    position:fixed;
+    left:50%;bottom:18px;transform:translateX(-50%);
+    background:var(--cream);
+    color:var(--ink);
+    border:1px solid #b39a63;
+    box-shadow:0 10px 30px rgba(0,0,0,.45), inset 0 0 0 3px var(--cream), inset 0 0 0 4px #c9b078;
+    display:flex;align-items:center;gap:14px;
+    padding:9px 16px;
+    font-family:var(--display);
+    z-index:60;
+    max-width:94vw;
+  }
+  .scorecard .sc-label{
+    font-weight:600;font-size:10px;letter-spacing:.32em;text-transform:uppercase;color:#9a7b3c;white-space:nowrap;
+  }
+  .tally{display:flex;gap:5px}
+  .tally i{
+    width:11px;height:11px;border:1px solid #9a7b3c;border-radius:50%;
+    display:block;transition:background .3s ease,transform .3s ease;
+  }
+  .tally i.hit{background:var(--mustard);border-color:var(--mustard);transform:scale(1.15)}
+  .scorecard .count{font-weight:700;font-size:13px;letter-spacing:.1em;min-width:44px;text-align:center}
+  .hintbtn{
+    font-family:var(--display);font-weight:600;
+    font-size:9.5px;letter-spacing:.24em;text-transform:uppercase;
+    background:none;border:1px solid #9a7b3c;color:#6e5526;
+    padding:6px 12px;cursor:pointer;white-space:nowrap;
+    transition:background .2s ease,color .2s ease;
+  }
+  .hintbtn:hover,.hintbtn[aria-pressed="true"]{background:var(--hedge);color:var(--cream);border-color:var(--hedge)}
+  .scorecard.perfect{border-color:var(--mustard)}
+  .scorecard.perfect .sc-label{color:var(--ink)}
+  .scorecard .perfect-cta{display:none}
+  .scorecard.perfect .perfect-cta{
+    display:inline-block;
+    font-weight:700;font-size:10px;letter-spacing:.24em;text-transform:uppercase;
+    color:var(--cream);background:var(--hedge);padding:7px 14px;text-decoration:none;white-space:nowrap;
+  }
+  .scorecard.perfect .perfect-cta:hover{background:var(--mustard);color:var(--ink)}
+
+  /* ---------- course notes (no-JS / reader fallback, source of card copy) ---------- */
+  .transcript{
+    width:min(92vw,640px);
+    margin:0 auto clamp(60px,9vh,90px);
+  }
+  .transcript summary{
+    cursor:pointer;
+    text-align:center;
+    font-family:var(--display);
+    font-weight:600;
+    font-size:11px;letter-spacing:.32em;text-transform:uppercase;
+    color:var(--mint);
+    padding:10px;
+    list-style:none;
+  }
+  .transcript summary::-webkit-details-marker{display:none}
+  .transcript summary::after{content:" +";color:var(--mustard)}
+  .transcript[open] summary::after{content:" −"}
+  .transcript summary h2{font:inherit;display:inline;letter-spacing:inherit}
+  .transcript ol{
+    list-style:none;
+    margin-top:18px;
+    border-top:1px solid rgba(217,166,46,.35);
+  }
+  .transcript li{
+    padding:22px 6px 24px;
+    border-bottom:1px solid rgba(217,166,46,.2);
+  }
+  .transcript .t-eyebrow{
+    font-family:var(--display);font-weight:600;
+    font-size:10px;letter-spacing:.4em;text-transform:uppercase;
+    color:var(--mustard);margin-bottom:7px;
+  }
+  .transcript h3{
+    font-family:var(--display);font-weight:700;
+    font-size:17px;letter-spacing:.06em;text-transform:uppercase;
+    margin-bottom:8px;
+  }
+  .transcript li p{font-size:14.5px;line-height:1.7;color:#dfe8d6}
+  .transcript .t-cta{
+    display:inline-block;margin-top:12px;
+    font-family:var(--display);font-weight:600;
+    font-size:11px;letter-spacing:.3em;text-transform:uppercase;
+    color:var(--cream);background:rgba(217,166,46,.16);
+    border:1px solid var(--mustard);
+    padding:9px 18px;text-decoration:none;
+    transition:background .2s ease,color .2s ease;
+  }
+  .transcript .t-cta:hover{background:var(--mustard);color:var(--ink)}
+
+  footer{
+    text-align:center;
+    padding:0 20px 120px;
+    font-family:var(--display);
+    font-size:10px;letter-spacing:.3em;text-transform:uppercase;
+    color:#8fae87;
+  }
+  footer a{color:var(--mint);text-decoration:none}
+  footer a:hover{color:var(--mustard)}
+
+  /* mobile: card becomes a bottom sheet */
+  @media (max-width:640px){
+    .card{
+      position:fixed;left:0;right:0;bottom:0;width:100%;
+      transform:translate(0,24px);
+      border-left:none;border-right:none;border-bottom:none;
+      padding:22px 22px 20px;
+      z-index:70;
+    }
+    .card.open{transform:translate(0,0)}
+    .card .c-eyebrow{font-size:10px;margin-bottom:8px}
+    .card h2{font-size:18px;margin-bottom:9px}
+    .card p{font-size:14px}
+    .card .cta{margin-top:14px;padding:10px 20px;font-size:11px}
+    .card .close{top:8px;right:10px;font-size:18px;padding:6px}
+    .scorecard{bottom:10px;gap:9px;padding:8px 12px}
+    .tally{display:none}
+    .hintbtn{padding:6px 9px}
+  }
+
+  @media (prefers-reduced-motion:reduce){
+    .scene-inner{transition:none}
+    .scene-inner img,.cloud,.scene.hints .hs .ping{animation:none}
+    .cloud{display:none}
+    .card,.dim{transition:none}
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="eyebrow">An AI consultancy for serious legacy code</div>
+  <h1>Breakfast<span class="ball">ball</span></h1>
+  <p class="sub">Legacy modernization by custom agent fleet. <b>Ten secrets</b> are hidden on this course. Find the phone&nbsp;booth.</p>
+</header>
+
+<div class="stage">
+  <div class="frame">
+    <div class="scene" id="scene">
+      <div class="scene-inner" id="parallax">
+        <picture>
+          <source type="image/avif" srcset="assets/course-800.avif 800w, assets/course.avif 1600w" sizes="(max-width: 640px) 92vw, 980px">
+          <img id="sceneImg"
+               src="assets/course.jpg"
+               srcset="assets/course-800.jpg 800w, assets/course.jpg 1600w"
+               sizes="(max-width: 640px) 92vw, 980px"
+               width="1600" height="1600"
+               fetchpriority="high" decoding="async"
+               alt="A storybook golf course tableau: the pink-and-mint Hickory Heights clubhouse on a hill, a caddie under a towering stack of golf bags, a golfer mid-swing, twin groundskeepers mowing in parallel, a striped breakfast cart, a leaderboard, a fox running off with a ball, a pink station wagon, a woman with a telescope, and a mint telephone booth.">
+        </picture>
+        <div class="cloud c1"></div>
+        <div class="cloud c2"></div>
+
+        <div class="overlay-board" aria-hidden="true">
+          <div class="bt">LEADERS</div>
+          <div class="row"><span class="num">1</span><span class="nm">ENCODING.COM</span><span class="sc">−4</span></div>
+          <div class="row"><span class="num">2</span><span class="nm">BREAKFASTBALL</span><span class="sc">−2</span></div>
+          <div class="row"><span class="num">3</span><span class="nm">PROBE.DEV</span><span class="sc">−1</span></div>
+          <div class="row"><span class="num">4</span><span class="nm">FREEBSD ’97</span><span class="sc">E</span></div>
+          <div class="row you"><span class="num">5</span><span class="nm">YOUR CODEBASE</span><span class="sc">+14</span></div>
+        </div>
+        <div class="plaque" aria-hidden="true">EST. 1997</div>
+
+        <div class="dim" id="dim"></div>
+        <div class="grain"></div>
+        <div class="vignette"></div>
+
+        <!-- hotspots -->
+        <button class="hs" data-id="fox"    style="left:28%;  top:81%;   width:13%; height:13%"  aria-label="The fox with a stolen golf ball"><span class="ping"></span></button>
+        <button class="hs" data-id="caddie" style="left:11%;  top:16%;   width:14%; height:58%"  aria-label="The caddie under a tower of golf bags"><span class="ping"></span></button>
+        <button class="hs" data-id="crew"   style="left:55%;  top:47%;   width:21%; height:17%"  aria-label="Twin groundskeepers mowing in parallel"><span class="ping"></span></button>
+        <button class="hs" data-id="golfer" style="left:41%;  top:58%;   width:15%; height:24%"  aria-label="The golfer mid swing"><span class="ping"></span></button>
+        <button class="hs" data-id="wagon"  style="left:0.5%; top:42%;   width:11.5%; height:10%" aria-label="The pink station wagon"><span class="ping"></span></button>
+        <button class="hs" data-id="cart"   style="left:74%;  top:39%;   width:18%; height:23%"  aria-label="The Ninth Hole breakfast cart"><span class="ping"></span></button>
+        <button class="hs" data-id="board"  style="left:65%;  top:59%;   width:20%; height:24%"  aria-label="The scoreboard keeper and leaderboard"><span class="ping"></span></button>
+        <button class="hs" data-id="scout"  style="left:0%;   top:57%;   width:12%; height:32%"  aria-label="The woman with the telescope"><span class="ping"></span></button>
+        <button class="hs" data-id="phone"  style="left:88%;  top:55%;   width:12%; height:35%"  aria-label="The telephone booth"><span class="ping"></span></button>
+        <button class="hs" data-id="club"   style="left:31%;  top:7%;    width:38%; height:31%"  aria-label="The Hickory Heights clubhouse"><span class="ping"></span></button>
+      </div>
+    </div>
+
+    <div class="card" id="card" role="dialog" aria-modal="false" aria-live="polite" aria-labelledby="cTitle">
+      <button class="close" id="cardClose" aria-label="Close">✕</button>
+      <div class="c-eyebrow" id="cEyebrow"></div>
+      <h2 id="cTitle"></h2>
+      <p id="cBody"></p>
+      <a class="cta" id="cCta" href="#" style="display:none"></a>
+    </div>
+  </div>
+</div>
+
+<!-- Single source of truth for the hotspot copy; readable without JS and by crawlers. -->
+<details class="transcript" id="transcript">
+  <summary><h2>Course notes — prefer to read the round?</h2></summary>
+  <ol>
+    <li data-spot="fox">
+      <p class="t-eyebrow">The Hook</p>
+      <h3>The fox is already running</h3>
+      <p>Your legacy codebase did not steal itself. Every quarter it sits, the rewrite gets bigger, the team gets slower, and the fox gets another ball. The phone booth works whenever you are ready.</p>
+    </li>
+    <li data-spot="caddie">
+      <p class="t-eyebrow">The Problem</p>
+      <h3>The bag only gets heavier</h3>
+      <p>Fifteen years of features. Five frameworks. One exhausted team carrying all of it up the hill. We carry exactly this.</p>
+    </li>
+    <li data-spot="crew">
+      <p class="t-eyebrow">The Method</p>
+      <h3>A fleet mows faster than a mower</h3>
+      <p>Not one AI assistant. A crew of purpose-built agents, each with its own stripe, working in parallel under an operator who has shipped since dial-up. That is how 3x happens.</p>
+    </li>
+    <li data-spot="golfer">
+      <p class="t-eyebrow">The Operator</p>
+      <h3>Same swing, better clubs</h3>
+      <p>Gregg has been shipping for 25 years. Kernel hacker in 1997. Cloud pioneer in 2008. Agent fleet operator now. Follow the pink wagon and the breakfast cart for the full round.</p>
+    </li>
+    <li data-spot="wagon">
+      <p class="t-eyebrow">1997</p>
+      <h3>Where the round started</h3>
+      <p>First job: the first web hosting company in Silicon Valley, where Gregg extended the FreeBSD kernel to invent virtual hosting. He was solving infrastructure problems before most of today's legacy code existed.</p>
+    </li>
+    <li data-spot="cart">
+      <p class="t-eyebrow">2008, and the name</p>
+      <h3>Everyone gets a breakfast ball</h3>
+      <p>A breakfast ball is the free do-over on the first tee. Gregg took his in the cloud: encoding.com, the first cloud video transcoding service, built on S3 and EC2 before that was normal, scaled to the biggest names in streaming. Your codebase deserves a do-over too.</p>
+    </li>
+    <li data-spot="board">
+      <p class="t-eyebrow">The Proof</p>
+      <h3>Check the leaderboard</h3>
+      <p>Every name on that board shipped. Engagements run in weeks, not roadmap quarters: migrations landed, coverage up, deploys multiplied. Note who is in last place.</p>
+    </li>
+    <li data-spot="scout">
+      <p class="t-eyebrow">The First Look</p>
+      <h3>Every engagement starts here</h3>
+      <p>A close, honest look at your codebase. You get an audit, a modernization roadmap, and a straight answer about what an agent fleet can and cannot do for it. No committal swing required.</p>
+    </li>
+    <li data-spot="phone">
+      <p class="t-eyebrow">The Call</p>
+      <h3>One conversation</h3>
+      <p>Bring your gnarliest repo. If a fleet will not move the needle, you will hear that too.</p>
+      <a class="t-cta" href="mailto:hello@breakfastball.com">Book a tee time</a>
+    </li>
+    <li data-spot="club">
+      <p class="t-eyebrow">The Club</p>
+      <h3>Members only means you</h3>
+      <p>Breakfastball, LLC. One operator, one offer: legacy modernization by custom agent fleet. Established 1997 in spirit. Check the plaque above the porch.</p>
+    </li>
+  </ol>
+</details>
+
+<div class="scorecard" id="scorecard">
+  <span class="sc-label">Scorecard</span>
+  <span class="tally" id="tally"></span>
+  <span class="count" id="count" aria-live="polite">0 / 10</span>
+  <button class="hintbtn" id="hintBtn" aria-pressed="false">Ask the caddie</button>
+  <a class="perfect-cta" href="mailto:hello@breakfastball.com">Play the 19th hole</a>
+</div>
+
+<footer>
+  <p>Breakfastball, LLC · <a href="mailto:hello@breakfastball.com">hello@breakfastball.com</a> · Hickory Heights, Established 1997</p>
+</footer>
+
+<script>
+(function(){
+  // Hotspot geometry: spotlight center (hx/hy, %) and radii (rx/ry, cqi).
+  // The copy for each spot lives in the #transcript markup below the stage.
+  const GEO = {
+    fox:   {hx:34.5, hy:87.5, rx:9,  ry:8},
+    caddie:{hx:18,   hy:45,   rx:10, ry:32},
+    crew:  {hx:65.5, hy:55,   rx:12, ry:10},
+    golfer:{hx:48.5, hy:70,   rx:9,  ry:14},
+    wagon: {hx:6,    hy:47,   rx:8,  ry:6},
+    cart:  {hx:83,   hy:50,   rx:11, ry:13},
+    board: {hx:75,   hy:70,   rx:12, ry:13},
+    scout: {hx:5.5,  hy:72,   rx:9,  ry:17},
+    phone: {hx:94.5, hy:72,   rx:8,  ry:19},
+    club:  {hx:50,   hy:22,   rx:22, ry:17}
+  };
+
+  const SPOTS = {};
+  document.querySelectorAll('#transcript li[data-spot]').forEach(li=>{
+    const id = li.dataset.spot;
+    const cta = li.querySelector('.t-cta');
+    SPOTS[id] = Object.assign({
+      eyebrow: li.querySelector('.t-eyebrow').textContent,
+      title:   li.querySelector('h3').textContent,
+      body:    li.querySelector('h3 + p').textContent,
+      cta:     cta ? {label: cta.textContent, href: cta.href} : null
+    }, GEO[id]);
+  });
+
+  const scene=document.getElementById('scene');
+  const dim=document.getElementById('dim');
+  const card=document.getElementById('card');
+  const cEyebrow=document.getElementById('cEyebrow');
+  const cTitle=document.getElementById('cTitle');
+  const cBody=document.getElementById('cBody');
+  const cCta=document.getElementById('cCta');
+  const tally=document.getElementById('tally');
+  const count=document.getElementById('count');
+  const scorecard=document.getElementById('scorecard');
+  const hintBtn=document.getElementById('hintBtn');
+  const parallax=document.getElementById('parallax');
+  const reduced=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const coarse=window.matchMedia('(pointer: coarse)').matches;
+
+  const found=new Set();
+  const ids=Object.keys(SPOTS);
+  ids.forEach(()=>{const i=document.createElement('i');tally.appendChild(i)});
+
+  let active=null, pinned=false, hoverTimer=null;
+
+  function spotlight(id){
+    const s=SPOTS[id];
+    dim.style.setProperty('--hx',s.hx+'%');
+    dim.style.setProperty('--hy',s.hy+'%');
+    dim.style.setProperty('--rx',s.rx+'cqi');
+    dim.style.setProperty('--ry',s.ry+'cqi');
+    scene.classList.add('lit');
+  }
+  function openCard(id){
+    const s=SPOTS[id];
+    active=id;
+    cEyebrow.textContent=s.eyebrow;
+    cTitle.textContent=s.title;
+    cBody.textContent=s.body;
+    if(s.cta){cCta.textContent=s.cta.label;cCta.href=s.cta.href;cCta.style.display='inline-block'}
+    else{cCta.style.display='none'}
+    card.classList.add('open');
+    spotlight(id);
+    mark(id);
+  }
+  function closeCard(){
+    active=null;pinned=false;
+    card.classList.remove('open');
+    scene.classList.remove('lit');
+  }
+  function mark(id){
+    if(found.has(id))return;
+    found.add(id);
+    const btn=scene.querySelector('.hs[data-id="'+id+'"]');
+    if(btn)btn.classList.add('found');
+    tally.children[found.size-1].classList.add('hit');
+    count.textContent=found.size+' / '+ids.length;
+    if(found.size===ids.length){
+      scorecard.classList.add('perfect');
+      count.textContent='Perfect round';
+      hintBtn.style.display='none';
+    }
+  }
+
+  scene.querySelectorAll('.hs').forEach(btn=>{
+    const id=btn.dataset.id;
+    if(!coarse){
+      btn.addEventListener('mouseenter',()=>{
+        if(pinned)return;
+        clearTimeout(hoverTimer);
+        hoverTimer=setTimeout(()=>openCard(id),120);
+      });
+      btn.addEventListener('mouseleave',()=>{
+        clearTimeout(hoverTimer);
+        if(!pinned)closeCard();
+      });
+    }
+    btn.addEventListener('click',e=>{
+      e.stopPropagation();
+      if(active===id&&pinned){closeCard();return}
+      pinned=true;openCard(id);
+    });
+    btn.addEventListener('focus',()=>{if(!pinned)openCard(id)});
+    btn.addEventListener('blur',()=>{if(!pinned)closeCard()});
+  });
+
+  document.getElementById('cardClose').addEventListener('click',e=>{e.stopPropagation();closeCard()});
+  document.addEventListener('keydown',e=>{if(e.key==='Escape')closeCard()});
+  document.addEventListener('click',e=>{
+    if(pinned&&!e.target.closest('.hs')&&!e.target.closest('.card'))closeCard();
+  });
+
+  hintBtn.addEventListener('click',()=>{
+    const on=scene.classList.toggle('hints');
+    hintBtn.setAttribute('aria-pressed',String(on));
+    hintBtn.textContent=on?'Thanks, caddie':'Ask the caddie';
+  });
+
+  if(!reduced&&!coarse){
+    const stage=document.querySelector('.stage');
+    let raf=null;
+    stage.addEventListener('mousemove',e=>{
+      if(raf)return;
+      raf=requestAnimationFrame(()=>{
+        const r=stage.getBoundingClientRect();
+        const dx=((e.clientX-r.left)/r.width-.5)*10;
+        const dy=((e.clientY-r.top)/r.height-.5)*7;
+        parallax.style.transform='translate('+(-dx)+'px,'+(-dy)+'px)';
+        raf=null;
+      });
+    });
+    stage.addEventListener('mouseleave',()=>{parallax.style.transform='translate(0,0)'});
+  }
+})();
+</script>
+</body>
+</html>
