@@ -4,21 +4,21 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Breakfastball · An AI Consultancy for Serious Legacy Code</title>
-<meta name="description" content="Breakfastball is an AI consultancy for serious legacy code — modernization by custom agent fleet, run by an operator who has shipped since 1997. Ten secrets are hidden on the course. Find the phone booth.">
+<meta name="description" content="Breakfastball is an AI consultancy for serious legacy code — modernization by custom agent fleet, run by an operator who has shipped since 1997. Nine secrets are hidden on the course. Then find the phone booth.">
 <meta name="color-scheme" content="light">
 <meta name="theme-color" content="#b7c4b2">
 <link rel="canonical" href="https://breakfastball-tawny.vercel.app/">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Breakfastball">
 <meta property="og:title" content="Breakfastball · An AI Consultancy for Serious Legacy Code">
-<meta property="og:description" content="Legacy modernization by custom agent fleet. Ten secrets are hidden on the course. Find the phone booth.">
+<meta property="og:description" content="Legacy modernization by custom agent fleet. Nine secrets are hidden on the course. Then find the phone booth.">
 <meta property="og:url" content="https://breakfastball-tawny.vercel.app/">
 <meta property="og:image" content="https://breakfastball-tawny.vercel.app/assets/og.jpg">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Breakfastball · An AI Consultancy for Serious Legacy Code">
-<meta name="twitter:description" content="Legacy modernization by custom agent fleet. Ten secrets are hidden on the course. Find the phone booth.">
+<meta name="twitter:description" content="Legacy modernization by custom agent fleet. Nine secrets are hidden on the course. Then find the phone booth.">
 <meta name="twitter:image" content="https://breakfastball-tawny.vercel.app/assets/og.jpg">
 <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
 <link rel="icon" href="assets/favicon.png" type="image/png" sizes="48x48">
@@ -580,46 +580,78 @@
   footer a{color:var(--brick);text-decoration:none}
   footer a:hover{color:var(--gold-deep)}
 
-  /* ---------- scorecard: engraved black plaque (Moonrise Kingdom) ---------- */
+  /* ---------- scorecard: a real front-nine card, like the club prints ---------- */
   .scorecard{
     position:fixed;
-    left:50%;bottom:16px;transform:translateX(-50%);
-    background:#1d201b;
-    color:var(--cream);
-    border:1px solid #0e100d;
-    box-shadow:0 10px 30px rgba(20,24,18,.5), inset 0 0 0 1px rgba(242,233,216,.28);
+    left:50%;bottom:14px;transform:translateX(-50%);
+    background:#efe4c9;
+    color:#3a2f1d;
+    border:1px solid #7a5c33;
+    box-shadow:0 10px 30px rgba(20,24,18,.45), inset 0 0 0 3px #efe4c9, inset 0 0 0 4px #c9b078;
     display:flex;align-items:center;gap:14px;
-    padding:10px 18px;
+    padding:8px 14px;
     font-family:var(--display);
     z-index:60;
-    max-width:94vw;
+    max-width:96vw;
   }
-  .scorecard .sc-label{
-    font-weight:600;font-size:10px;letter-spacing:.32em;text-transform:uppercase;color:#b9b399;white-space:nowrap;
+  .sc-head{
+    display:flex;flex-direction:column;align-items:center;gap:2px;
+    padding-right:2px;text-align:center;
   }
-  .tally{display:flex;gap:5px}
-  .tally i{
-    width:10px;height:10px;border:1px solid #8d876e;border-radius:50%;
-    display:block;transition:background .3s ease,transform .3s ease;
+  .sc-head .sc-club{
+    font-weight:700;font-size:8.5px;letter-spacing:.24em;text-transform:uppercase;color:#3a2f1d;
   }
-  .tally i.hit{background:#d9a62e;border-color:#d9a62e;transform:scale(1.15)}
-  .scorecard .count{font-weight:700;font-size:13px;letter-spacing:.1em;min-width:44px;text-align:center;color:var(--cream);white-space:nowrap}
+  .sc-head .sc-title{
+    font-weight:600;font-size:7.5px;letter-spacing:.3em;text-transform:uppercase;color:#8a6a35;
+  }
+  .sc-table{border-collapse:collapse}
+  .sc-table th,.sc-table td{
+    border:1px solid #a8905e;
+    width:24px;height:19px;
+    text-align:center;vertical-align:middle;
+    font-family:var(--display);font-weight:600;
+    font-size:9.5px;color:#3a2f1d;
+    padding:0;
+  }
+  .sc-table th.lbl{
+    width:auto;padding:0 8px;
+    font-size:7.5px;letter-spacing:.22em;text-transform:uppercase;
+    color:#8a6a35;text-align:left;
+  }
+  .sc-table .out{width:32px;font-weight:700}
+  .sc-table .par-row td{color:#8a6a35}
+  .sc-mark{
+    display:inline-flex;width:15px;height:15px;
+    align-items:center;justify-content:center;
+    font-weight:700;font-size:9px;line-height:1;
+    border:1.3px solid transparent;
+  }
+  .sc-mark.birdie{border-color:#2c352a;border-radius:50%}
+  .sc-mark.bogey{border-color:#a03c28;border-radius:0;color:#a03c28}
+  .sc-side{display:flex;flex-direction:column;align-items:center;gap:5px}
+  .sc-legend{
+    font-family:var(--display);font-weight:600;
+    font-size:7px;letter-spacing:.14em;text-transform:uppercase;
+    color:#8a6a35;white-space:nowrap;
+  }
+  .sc-legend .sc-mark{width:9px;height:9px;vertical-align:-1px}
   .hintbtn{
     font-family:var(--display);font-weight:600;
-    font-size:9.5px;letter-spacing:.24em;text-transform:uppercase;
-    background:none;border:1px solid #8d876e;color:#d8d1b6;
-    padding:6px 12px;cursor:pointer;white-space:nowrap;
+    font-size:9px;letter-spacing:.22em;text-transform:uppercase;
+    background:none;border:1px solid #8a6a35;color:#6e5526;
+    padding:5px 11px;cursor:pointer;white-space:nowrap;
     transition:background .2s ease,color .2s ease;
   }
-  .hintbtn:hover,.hintbtn[aria-pressed="true"]{background:var(--cream);color:#1d201b;border-color:var(--cream)}
-  .scorecard.perfect{border-color:var(--gold);box-shadow:0 10px 30px rgba(20,24,18,.5), inset 0 0 0 1px var(--gold)}
+  .hintbtn:hover,.hintbtn[aria-pressed="true"]{background:var(--hedge);color:var(--cream);border-color:var(--hedge)}
+  .scorecard.perfect{border-color:var(--gold);box-shadow:0 10px 30px rgba(20,24,18,.45), inset 0 0 0 3px #efe4c9, inset 0 0 0 4px var(--gold)}
   .scorecard .perfect-cta{display:none}
+  .scorecard.perfect .hintbtn{display:none}
   .scorecard.perfect .perfect-cta{
     display:inline-block;
-    font-weight:700;font-size:10px;letter-spacing:.24em;text-transform:uppercase;
-    color:#1d201b;background:#d9a62e;padding:7px 14px;text-decoration:none;white-space:nowrap;
+    font-weight:700;font-size:9.5px;letter-spacing:.22em;text-transform:uppercase;
+    color:var(--cream);background:var(--hedge);padding:6px 12px;text-decoration:none;white-space:nowrap;
   }
-  .scorecard.perfect .perfect-cta:hover{background:var(--cream)}
+  .scorecard.perfect .perfect-cta:hover{background:var(--gold);color:#2c352a}
 
   /* mobile: card becomes a bottom sheet */
   @media (max-width:640px){
@@ -643,9 +675,13 @@
     .card .cta{margin-top:14px;padding:10px 20px;font-size:11px}
     .card .close{top:8px;right:10px;font-size:18px;padding:6px}
     .billing{transform:none;line-height:1.9}
-    .scorecard{bottom:10px;gap:9px;padding:8px 12px}
-    .tally{display:none}
-    .hintbtn{padding:6px 9px}
+    .scorecard{bottom:8px;gap:6px;padding:7px 9px;flex-direction:column}
+    .sc-head{flex-direction:row;gap:6px;padding:0}
+    .sc-table th,.sc-table td{width:21px;height:17px;font-size:8.5px}
+    .sc-table th.lbl{padding:0 5px}
+    .sc-side{flex-direction:row;gap:8px}
+    .sc-legend{display:none}
+    .hintbtn{padding:5px 9px}
   }
 
   @media (prefers-reduced-motion:reduce){
@@ -708,7 +744,7 @@
     <span class="who"><span class="nm">QA &amp; Acceptance</span><span class="as">call every score</span></span>
     <span class="who"><span class="nm">and Your Legacy Codebase</span><span class="as">currently +14</span></span>
   </aside>
-  <p class="introducing">and introducing <b>ten secrets</b> hidden in frame — find the phone booth</p>
+  <p class="introducing">and introducing <b>nine secrets</b> hidden in frame — then find the phone booth, the 19th hole</p>
   <div class="artwrap">
     <div class="scene" id="scene">
       <div class="scene-inner" id="parallax">
@@ -888,11 +924,35 @@
 </div>
 
 <div class="scorecard" id="scorecard">
-  <span class="sc-label">Scorecard</span>
-  <span class="tally" id="tally"></span>
-  <span class="count" id="count" aria-live="polite">0 / 10</span>
-  <button class="hintbtn" id="hintBtn" aria-pressed="false">Ask the caddie</button>
-  <a class="perfect-cta" href="mailto:hello@breakfastball.com">Play the 19th hole</a>
+  <div class="sc-head">
+    <span class="sc-club">Hickory Heights</span>
+    <span class="sc-title">Scorecard</span>
+  </div>
+  <table class="sc-table" aria-hidden="true">
+    <tr>
+      <th class="lbl">Hole</th>
+      <th>1</th><th>2</th><th>3</th><th>4</th><th>5</th><th>6</th><th>7</th><th>8</th><th>9</th>
+      <th class="out">Out</th>
+    </tr>
+    <tr class="par-row">
+      <th class="lbl">Par</th>
+      <td>4</td><td>4</td><td>3</td><td>5</td><td>4</td><td>3</td><td>4</td><td>5</td><td>4</td>
+      <td class="out">36</td>
+    </tr>
+    <tr id="scYou">
+      <th class="lbl">You</th>
+      <td data-hole="fox"></td><td data-hole="caddie"></td><td data-hole="crew"></td>
+      <td data-hole="golfer"></td><td data-hole="wagon"></td><td data-hole="cart"></td>
+      <td data-hole="board"></td><td data-hole="scout"></td><td data-hole="club"></td>
+      <td class="out" id="scOut"></td>
+    </tr>
+  </table>
+  <div class="sc-side">
+    <p class="sc-legend" id="scLegend"><span class="sc-mark birdie"></span> birdie &nbsp;·&nbsp; <span class="sc-mark bogey"></span> bogey, caddie helped</p>
+    <button class="hintbtn" id="hintBtn" aria-pressed="false">Ask the caddie</button>
+    <a class="perfect-cta" href="mailto:hello@breakfastball.com">Play the 19th hole</a>
+  </div>
+  <span class="visually-hidden" id="scLive" aria-live="polite"></span>
 </div>
 
 <footer>
@@ -935,17 +995,20 @@
   const cTitle=document.getElementById('cTitle');
   const cBody=document.getElementById('cBody');
   const cCta=document.getElementById('cCta');
-  const tally=document.getElementById('tally');
-  const count=document.getElementById('count');
   const scorecard=document.getElementById('scorecard');
+  const scOut=document.getElementById('scOut');
+  const scLive=document.getElementById('scLive');
+  const scLegend=document.getElementById('scLegend');
   const hintBtn=document.getElementById('hintBtn');
   const parallax=document.getElementById('parallax');
   const reduced=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   const coarse=window.matchMedia('(pointer: coarse)').matches;
 
+  // front nine: the nine scored secrets, in card order; the phone booth is the 19th hole
+  const HOLES=['fox','caddie','crew','golfer','wagon','cart','board','scout','club'];
+  const PARS=[4,4,3,5,4,3,4,5,4];
   const found=new Set();
-  const ids=Object.keys(SPOTS);
-  ids.forEach(()=>{const i=document.createElement('i');tally.appendChild(i)});
+  let total=0, allBirdies=true;
 
   let active=null, pinned=false, hoverTimer=null;
 
@@ -975,16 +1038,29 @@
     scene.classList.remove('lit');
   }
   function mark(id){
-    if(found.has(id))return;
-    found.add(id);
     const btn=scene.querySelector('.hs[data-id="'+id+'"]');
     if(btn)btn.classList.add('found');
-    tally.children[found.size-1].classList.add('hit');
-    count.textContent=found.size+' / '+ids.length;
-    if(found.size===ids.length){
+    if(id==='phone'||found.has(id))return;   // the 19th hole is never scored
+    found.add(id);
+    const idx=HOLES.indexOf(id);
+    const hinted=scene.classList.contains('hints');
+    const score=PARS[idx]+(hinted?1:-1);
+    if(hinted)allBirdies=false;
+    total+=score;
+    const cell=scorecard.querySelector('td[data-hole="'+id+'"]');
+    if(cell)cell.innerHTML='<span class="sc-mark '+(hinted?'bogey':'birdie')+'">'+score+'</span>';
+    scOut.textContent=total;
+    scLive.textContent='Hole '+(idx+1)+': '+(hinted?'bogey':'birdie')+'. '+found.size+' of 9 found.';
+    if(found.size===HOLES.length){
       scorecard.classList.add('perfect');
-      count.textContent='Perfect round';
-      hintBtn.style.display='none';
+      const diff=total-36;
+      scLegend.style.display='block';
+      scLegend.textContent=allBirdies
+        ? total+' · nine under par — a perfect round'
+        : (diff<0 ? total+' · '+(-diff)+' under par — well played'
+           : diff===0 ? total+' · level par — respectable'
+           : total+' · '+diff+' over par — the caddie sends his regards');
+      scLive.textContent='Front nine complete: '+scLegend.textContent+'. The 19th hole is open.';
     }
   }
 

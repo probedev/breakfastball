@@ -3,7 +3,7 @@
 An AI consultancy for serious legacy code — legacy modernization by custom agent fleet.
 
 The site is a single-page landing page styled as a Wes Anderson theatrical one-sheet,
-wrapped around an interactive hidden-object golf-course tableau: ten hotspots, each
+wrapped around an interactive hidden-object golf-course tableau: nine scored hotspots and the phone booth (the 19th hole), each
 revealing a chapter of the story. Find the phone booth.
 
 ## Design language
