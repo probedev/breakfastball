@@ -293,16 +293,6 @@
   .overlay-board .row .sc{font-weight:700}
   .overlay-board .row.you .sc{color:#a03c28}
   .overlay-board .row.you .nm{color:#a03c28}
-  .plaque{
-    position:absolute;
-    left:54.55%; top:29.75%; width:4.05%; height:1.55%;
-    background:#efe4c9;
-    display:flex;align-items:center;justify-content:center;
-    font-family:var(--display);font-weight:600;
-    font-size:.72cqi;letter-spacing:.14em;color:#4a3b22;
-    border-radius:.15cqi;
-    box-shadow:inset 0 0 .3cqi rgba(90,60,20,.4);
-  }
 
   .hs{
     position:absolute;
@@ -769,7 +759,6 @@
           <div class="row"><span class="num">4</span><span class="nm">FREEBSD ’97</span><span class="sc">E</span></div>
           <div class="row you"><span class="num">5</span><span class="nm">YOUR CODEBASE</span><span class="sc">+14</span></div>
         </div>
-        <div class="plaque" aria-hidden="true">EST. 1997</div>
 
         <div class="dim" id="dim"></div>
         <div class="grain"></div>
@@ -916,7 +905,7 @@
         <li data-spot="club">
           <p class="t-eyebrow">The Club</p>
           <h3>Members only means you</h3>
-          <p>Breakfastball, LLC. One operator, one offer: legacy modernization by custom agent fleet. The clubhouse has been open since 1997 — hosting, then the early-2000s pro shop (cart, gateway, and hosting account, bundled), then cloud video, now fleets. Check the plaque above the porch.</p>
+          <p>Breakfastball, LLC. One operator, one offer: legacy modernization by custom agent fleet. The clubhouse has been open since 1997 — hosting, then the early-2000s pro shop (cart, gateway, and hosting account, bundled), then cloud video, now fleets. The sign painter wrote 1927 and would not come back up the ladder.</p>
         </li>
       </ol>
     </details>
@@ -1010,7 +999,7 @@
   const found=new Set();
   let total=0, allBirdies=true;
 
-  let active=null, pinned=false, hoverTimer=null;
+  let active=null, pinned=false, hoverTimer=null, closeTimer=null;
 
   function spotlight(id){
     const s=SPOTS[id];
@@ -1069,12 +1058,18 @@
     if(!coarse){
       btn.addEventListener('mouseenter',()=>{
         if(pinned)return;
+        clearTimeout(closeTimer);
         clearTimeout(hoverTimer);
-        hoverTimer=setTimeout(()=>openCard(id),120);
+        // if a card is already up, swap content immediately; otherwise a short
+        // intent delay keeps drive-by cursor moves from flashing cards
+        hoverTimer=setTimeout(()=>openCard(id), active?0:120);
       });
       btn.addEventListener('mouseleave',()=>{
         clearTimeout(hoverTimer);
-        if(!pinned)closeCard();
+        if(!pinned){
+          clearTimeout(closeTimer);
+          closeTimer=setTimeout(closeCard,170);
+        }
       });
     }
     btn.addEventListener('click',e=>{
@@ -1086,6 +1081,10 @@
     btn.addEventListener('blur',()=>{if(!pinned)closeCard()});
   });
 
+  card.addEventListener('mouseenter',()=>{clearTimeout(closeTimer);clearTimeout(hoverTimer)});
+  card.addEventListener('mouseleave',()=>{
+    if(!pinned){clearTimeout(closeTimer);closeTimer=setTimeout(closeCard,170)}
+  });
   document.getElementById('cardClose').addEventListener('click',e=>{e.stopPropagation();closeCard()});
   document.addEventListener('keydown',e=>{if(e.key==='Escape')closeCard()});
   document.addEventListener('click',e=>{
@@ -1105,8 +1104,8 @@
       if(raf)return;
       raf=requestAnimationFrame(()=>{
         const r=stage.getBoundingClientRect();
-        const dx=((e.clientX-r.left)/r.width-.5)*10;
-        const dy=((e.clientY-r.top)/r.height-.5)*7;
+        const dx=((e.clientX-r.left)/r.width-.5)*6;
+        const dy=((e.clientY-r.top)/r.height-.5)*4;
         parallax.style.transform='translate('+(-dx)+'px,'+(-dy)+'px)';
         raf=null;
       });
