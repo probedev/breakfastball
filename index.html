@@ -34,7 +34,11 @@
   "description": "An AI consultancy for serious legacy code. Legacy modernization by custom agent fleet.",
   "url": "https://breakfastball-tawny.vercel.app/",
   "email": "hello@breakfastball.com",
-  "award": ["Technical Emmy Award (2020)", "Amazon Startup Challenge Finalist (2007)"]
+  "award": ["Technology & Engineering Emmy Award (2020)", "AWS Start-Up Challenge Finalist (2008)"],
+  "sameAs": [
+    "https://www.prnewswire.com/news-releases/encodingcom-honored-with-the-2020-emmy-award-for-technology--engineering-301213260.html",
+    "https://aws.amazon.com/blogs/aws/2008-aws-startup-challenge-finalists/"
+  ]
 }
 </script>
 <style>
@@ -95,9 +99,12 @@
     letter-spacing:.2em;text-transform:uppercase;
     color:var(--ink-soft);text-align:center;line-height:1.55;
   }
+  a.laurel{text-decoration:none;transition:color .2s ease}
+  a.laurel:hover,a.laurel:hover .yr{color:var(--brick)}
+  a.laurel:hover svg{stroke:var(--brick)}
   .laurel:first-child{justify-self:end}
   .laurel:last-child{justify-self:start}
-  .laurel svg{width:clamp(58px,7vw,80px);height:auto;stroke:var(--ink-soft);fill:none;stroke-width:2;stroke-linecap:round}
+  .laurel svg{width:clamp(58px,7vw,80px);height:auto;stroke:var(--ink-soft);fill:none;stroke-width:2;stroke-linecap:round;transition:stroke .2s ease}
   .laurel .yr{font-weight:700;color:var(--ink);font-size:1.2em;letter-spacing:.26em}
   .presents{
     font-family:var(--display);font-weight:600;
@@ -777,17 +784,17 @@
 <header class="sky">
   <div class="sky-inner">
     <div class="laurel-row">
-      <div class="laurel">
+      <a class="laurel" href="https://aws.amazon.com/blogs/aws/2008-aws-startup-challenge-finalists/" target="_blank" rel="noopener">
         <svg viewBox="0 0 100 40" aria-hidden="true">
           <path d="M50 36 C30 36 16 26 12 8 M18 30 q-7 1 -10 -5 q7 -3 10 5 M14 22 q-7 0 -9 -6 q7 -2 9 6 M12 14 q-6 -1 -7 -7 q7 -1 7 7 M24 34 q-6 3 -11 -1 q5 -5 11 1 M32 36 q-5 4 -11 2 q4 -6 11 -2 M41 37 q-4 5 -11 4 q3 -7 11 -4"/>
           <path d="M50 36 C70 36 84 26 88 8 M82 30 q7 1 10 -5 q-7 -3 -10 5 M86 22 q7 0 9 -6 q-7 -2 -9 6 M88 14 q6 -1 7 -7 q-7 -1 -7 7 M76 34 q6 3 11 -1 q-5 -5 -11 1 M68 36 q5 4 11 2 q-4 -6 -11 -2 M59 37 q4 5 11 4 q-3 -7 -11 -4"/>
         </svg>
         <span>Finalist</span>
-        <span>Amazon Startup Challenge</span>
-        <span class="yr">2007</span>
-      </div>
+        <span>AWS Start-Up Challenge</span>
+        <span class="yr">2008</span>
+      </a>
       <p class="presents"><b>Breakfastball, LLC</b> presents an Agent Fleet production</p>
-      <div class="laurel">
+      <a class="laurel" href="https://www.prnewswire.com/news-releases/encodingcom-honored-with-the-2020-emmy-award-for-technology--engineering-301213260.html" target="_blank" rel="noopener">
         <svg viewBox="0 0 100 40" aria-hidden="true">
           <path d="M50 36 C30 36 16 26 12 8 M18 30 q-7 1 -10 -5 q7 -3 10 5 M14 22 q-7 0 -9 -6 q7 -2 9 6 M12 14 q-6 -1 -7 -7 q7 -1 7 7 M24 34 q-6 3 -11 -1 q5 -5 11 1 M32 36 q-5 4 -11 2 q4 -6 11 -2 M41 37 q-4 5 -11 4 q3 -7 11 -4"/>
           <path d="M50 36 C70 36 84 26 88 8 M82 30 q7 1 10 -5 q-7 -3 -10 5 M86 22 q7 0 9 -6 q-7 -2 -9 6 M88 14 q6 -1 7 -7 q-7 -1 -7 7 M76 34 q6 3 11 -1 q-5 -5 -11 1 M68 36 q5 4 11 2 q-4 -6 -11 -2 M59 37 q4 5 11 4 q-3 -7 -11 -4"/>
@@ -795,7 +802,7 @@
         <span>Winner</span>
         <span>Technical Emmy Award</span>
         <span class="yr">2020</span>
-      </div>
+      </a>
     </div>
 
     <h1 class="arc-wrap">
