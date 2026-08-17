@@ -53,4 +53,4 @@ Vercel project (Vercel dashboard → Add New Project → Import `probedev/breakf
 - Confirm the contact address — `hello@breakfastball.com` is a placeholder used in the
   `mailto:` links, footer, and JSON-LD.
 - When a custom domain is added, update the `og:url`, `og:image`, `twitter:image`,
-  canonical link, and JSON-LD `url` in `index.html` (currently `breakfastball.vercel.app`).
+  canonical link, and JSON-LD `url` in `index.html` (currently `breakfastball-tawny.vercel.app`).
