@@ -74,7 +74,7 @@
   /* ---------- sky field (everything above the artwork) ---------- */
   .sky{
     background:linear-gradient(var(--sky-high), var(--sky) 70%);
-    padding:clamp(18px,3vh,34px) 20px clamp(26px,4vh,44px);
+    padding:clamp(14px,2.2vh,26px) 20px clamp(10px,1.6vh,18px);
     text-align:center;
   }
   .sky-inner{max-width:1100px;margin:0 auto}
@@ -107,7 +107,7 @@
   .presents b{color:var(--ink);font-weight:700}
 
   /* title on a cable arc (Grand Budapest) */
-  .arc-wrap{margin:0 auto;max-width:1400px}
+  .arc-wrap{margin:0 auto;max-width:min(94vw,980px)}
   .arc-wrap svg{
     display:block;width:100%;height:auto;overflow:visible;
   }
@@ -131,22 +131,20 @@
     font-size:clamp(9px,1.15vw,12px);
     letter-spacing:.42em;text-transform:uppercase;
     color:var(--hedge);
-    margin:clamp(8px,1.4vh,16px) 0 clamp(16px,2.6vh,30px);
+    margin:clamp(6px,1vh,12px) 0 0;
   }
   .subline::before,.subline::after{content:"·";margin:0 12px;color:var(--brick)}
 
-  /* cast block in the sky (Grand Budapest pairs) */
+  /* cast columns flanking the still (Asteroid City: names in the sky beside the art) */
   .cast{
-    display:grid;
-    grid-template-columns:repeat(2, minmax(0,300px));
-    justify-content:center;
-    column-gap:clamp(30px,7vw,110px);
-    row-gap:clamp(10px,1.8vh,18px);
+    display:flex;flex-direction:column;justify-content:center;
+    gap:clamp(16px,3.6vh,42px);
+    text-align:center;
   }
-  .cast .who{font-family:var(--display);text-wrap:balance}
+  .cast .who{font-family:var(--display);text-wrap:balance;display:block}
   .cast .who .nm{
     display:block;font-weight:700;
-    font-size:clamp(11px,1.35vw,15px);
+    font-size:clamp(11px,1.1vw,15px);
     letter-spacing:.22em;text-transform:uppercase;
     color:var(--ink);
   }
@@ -154,16 +152,17 @@
   .cast .who .as{
     display:block;margin-top:2px;
     font-family:var(--body);font-style:italic;
-    font-size:clamp(10px,1.1vw,12.5px);
+    font-size:clamp(10px,1vw,12.5px);
     color:var(--ink-soft);
   }
-  .cast .who.wide{grid-column:1 / -1}
   .introducing{
-    margin-top:clamp(16px,2.6vh,26px);
+    grid-area:intro;
+    margin-top:clamp(14px,2.2vh,24px);
     font-family:var(--display);font-weight:600;
     font-size:clamp(9px,1.1vw,11.5px);
     letter-spacing:.34em;text-transform:uppercase;
     color:var(--ink-soft);
+    text-align:center;
   }
   .introducing b{color:var(--brick);font-weight:700}
 
@@ -171,13 +170,42 @@
   .stage{
     position:relative;
     background:var(--sky);
-    display:flex;justify-content:center;
-    padding:0 0 clamp(26px,4vh,46px);
+    display:grid;
+    grid-template-columns:minmax(0,1fr);
+    grid-template-areas:"art" "castL" "castR" "intro";
+    justify-content:center;
+    justify-items:center;
+    align-items:center;
+    column-gap:clamp(20px,2.6vw,52px);
+    row-gap:clamp(18px,3vh,30px);
+    padding:clamp(14px,2.4vh,26px) 20px clamp(22px,3.5vh,42px);
   }
+  .cast-left{grid-area:castL}
+  .cast-right{grid-area:castR}
   .artwrap{
+    grid-area:art;
     position:relative;
-    width:min(96vw, 88vh, 980px);
+    width:min(96vw, 92vh, 1100px);
     box-shadow:0 22px 60px rgba(44,53,42,.38), 0 4px 14px rgba(44,53,42,.28);
+  }
+  /* wide screens: cast flanks the art in the side fields */
+  @media (min-width:1280px){
+    .stage{
+      grid-template-columns:minmax(150px,240px) auto minmax(150px,240px);
+      grid-template-areas:"castL art castR" ". intro .";
+      row-gap:0;
+    }
+    .artwrap{width:min(94vh, 1200px, calc(100vw - 480px))}
+  }
+  /* mid screens: cast in two columns below the art */
+  @media (min-width:641px) and (max-width:1279px){
+    .stage{
+      grid-template-columns:minmax(0,340px) minmax(0,340px);
+      grid-template-areas:"art art" "castL castR" "intro intro";
+      align-items:start;
+    }
+    .stage .cast{justify-content:flex-start;gap:clamp(16px,2.6vh,26px)}
+    .artwrap{width:min(96vw, 92vh, 980px)}
   }
   .scene{
     position:relative;
@@ -532,7 +560,8 @@
     .laurel{display:none}
     .laurel-row{grid-template-columns:1fr}
     .arc-wrap text{letter-spacing:6px;font-size:106px}
-    .cast{grid-template-columns:minmax(0,1fr);row-gap:12px}
+    .cast{gap:14px}
+    .stage{padding-left:0;padding-right:0}
     .artwrap{width:100vw}
     .card{
       position:fixed;left:0;right:0;bottom:0;width:100%;
@@ -596,31 +625,31 @@
     </h1>
 
     <p class="subline">An AI consultancy for serious legacy code</p>
-
-    <div class="cast">
-      <span class="who"><span class="nm">Gregg</span><span class="as">the operator</span></span>
-      <span class="who"><span class="nm">A Fox in a Bowtie</span><span class="as">the hook</span></span>
-      <span class="who"><span class="nm">An Overloaded Caddie</span><span class="as">the problem</span></span>
-      <span class="who"><span class="nm">Twin Groundskeepers</span><span class="as">the method</span></span>
-      <span class="who"><span class="nm">A Woman with a Telescope</span><span class="as">the first look</span></span>
-      <span class="who"><span class="nm">The Ninth Hole Breakfast Cart</span><span class="as">est. 2008</span></span>
-      <span class="who wide"><span class="nm">and Your Legacy Codebase</span><span class="as">currently +14</span></span>
-    </div>
-
-    <p class="introducing">and introducing <b>ten secrets</b> hidden in frame — find the phone booth</p>
   </div>
 </header>
 
 <div class="stage">
+  <aside class="cast cast-left">
+    <span class="who"><span class="nm">Gregg</span><span class="as">the operator</span></span>
+    <span class="who"><span class="nm">An Overloaded Caddie</span><span class="as">the problem</span></span>
+    <span class="who"><span class="nm">A Woman with a Telescope</span><span class="as">the first look</span></span>
+  </aside>
+  <aside class="cast cast-right">
+    <span class="who"><span class="nm">A Fox in a Bowtie</span><span class="as">the hook</span></span>
+    <span class="who"><span class="nm">Twin Groundskeepers</span><span class="as">the method</span></span>
+    <span class="who"><span class="nm">The Ninth Hole Breakfast Cart</span><span class="as">est. 2008</span></span>
+    <span class="who"><span class="nm">and Your Legacy Codebase</span><span class="as">currently +14</span></span>
+  </aside>
+  <p class="introducing">and introducing <b>ten secrets</b> hidden in frame — find the phone booth</p>
   <div class="artwrap">
     <div class="scene" id="scene">
       <div class="scene-inner" id="parallax">
         <picture>
-          <source type="image/avif" srcset="assets/course-800.avif 800w, assets/course.avif 1600w" sizes="(max-width: 640px) 100vw, 980px">
+          <source type="image/avif" srcset="assets/course-800.avif 800w, assets/course.avif 1600w" sizes="(max-width: 640px) 100vw, 1200px">
           <img id="sceneImg"
                src="assets/course.jpg"
                srcset="assets/course-800.jpg 800w, assets/course.jpg 1600w"
-               sizes="(max-width: 640px) 100vw, 980px"
+               sizes="(max-width: 640px) 100vw, 1200px"
                width="1600" height="1600"
                fetchpriority="high" decoding="async"
                alt="A storybook golf course tableau: the pink-and-mint Hickory Heights clubhouse on a hill, a caddie under a towering stack of golf bags, a golfer mid-swing, twin groundskeepers mowing in parallel, a striped breakfast cart, a leaderboard, a fox running off with a ball, a pink station wagon, a woman with a telescope, and a mint telephone booth.">
